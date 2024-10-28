@@ -19,9 +19,12 @@
         <tbody>
             {% for usuario in usuarios %}
             <tr>
-                <th>{{ usuario.first_name }}</th>
-                <th>{{ usuario.last_name }}</th>
-                <th>{{ usuario.rol_id }}</th>
+                <td>{{ usuario.first_name }}</td>
+                <td>{{ usuario.last_name }}</td>
+                <td>{{ usuario.rol_id }}</td>
+                <td></td>
+                <td><a href="/editarUsuario/{{ usuario.id }}"> EDITAR </a></td>
+                <td><a href="/eliminarUsuario/{{ usuario.id }}"> ELIMINAR </a></td>
             </tr>
             {% endfor %}
         </tbody>

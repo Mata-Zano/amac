@@ -17,5 +17,22 @@ def addUser (request):
             form.save()
         return redirect('/')
     data = {'form' : form}
-    return render(request, 'agregar.html', data)    
+    return render(request, 'agregar.html', data)   
+
+def editUser(request, id):
+    usuario = User.objects.get(id = id)
+    form = FormUser(instance=usuario)
+    if request.method == 'POST' :
+        form = FormUser(request.POST, instance=usuario)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+    data = {'form':form}
+    return render(request, 'agregar.html', data)
+
+def deleteUser(request, id):
+    usuario = User.objects.get(id = id)
+    usuario.delete()
+    return redirect('/')
+
 # Create your views here.

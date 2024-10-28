@@ -16,12 +16,14 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import user, addUser
+from .views import user, addUser, editUser, deleteUser
 
 
 urlpatterns = [
     path('',user, name="User"),
-    path('agregar/',addUser, name="User"),
+    path('agregarUsuario/',addUser, name="addUser"),
+    path('editarUsuario/<int:id>',editUser, name="editUser"),
+    path('eliminarUsuario/<int:id>',deleteUser, name="editUser"),
 
 
 ]
