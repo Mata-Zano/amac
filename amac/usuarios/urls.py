@@ -16,10 +16,12 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import user
+from .views import user, addUser
 
 
 urlpatterns = [
     path('',user, name="User"),
+    path('agregar/',addUser, name="User"),
+
 
 ]
