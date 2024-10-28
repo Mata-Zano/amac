@@ -8,6 +8,7 @@
 <body>
     <h1>Listado de Usuarios</h1>
     {% if usuarios %}
+    <h3><a href = {% url 'addUser' %} >Agregar un nuevo Usuario</a></h3>
     <table>
         <thead>
             <tr>
@@ -30,7 +31,8 @@
         </tbody>
     </table>
     {% else %}
-    <h2></h2>
+    <h2>No sean creados ningún usuario</h2>
     {% endif %}
+    <h4><a href={% url 'home' %}>Devolverse</a></h4>
 </body>
 </html>

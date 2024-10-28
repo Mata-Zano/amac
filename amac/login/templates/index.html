@@ -8,8 +8,16 @@
 <body>
     <h1>Bienvenidos al sistema</h1>
     <h3>
-        {{ user.username }}
+        {{ user.first_name }}
+        {{ user.last_name }}
+        <br>
+        {{ user.rol }}
+
     </h3>
-    <a href= {% url 'salir' %} >salir</a>
+    <ul>
+        <li><a href = {% url 'User' %} >Usuarios</a></li>
+        <li><a href= {% url 'salir' %} >salir</a></li>
+    </ul>
+    
 </body>
 </html>
