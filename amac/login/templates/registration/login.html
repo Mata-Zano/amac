@@ -8,7 +8,9 @@
 <body>
     <h1>Bienvenidos al login principal</h1>
     <form action="" method="post">
-        <input type="email" name="email" id="" placeholder="Ingrese su correo electronico">
+        {% csrf_token %}
+
+        <input type="text" name="username" id="" placeholder="Ingrese su nombre">
         <br>
         <input type="password" name="password" id="" placeholder="Ingresa una contraseña">
         <br>
@@ -16,4 +18,4 @@
         <button type="submit">Ingresar al sistema</button>
     </form>
 </body>
-</html>
+</html> 
