@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Listado de Usuarios</h1>
+    {% if usuarios %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombe</th>
+                <th>Apellido</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <th>{{ usuario.first_name }}</th>
+                <th>{{ usuario.last_name }}</th>
+                <th>{{ usuario.rol_id }}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h2></h2>
+    {% endif %}
+</body>
+</html>

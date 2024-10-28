@@ -17,5 +17,8 @@ class Roles (models.Model):
 
 
 class User(AbstractUser):
-    rol = models.ForeignKey(Roles, null=False, blank=False, on_delete= models.DO_NOTHING)
+    rol = models.ForeignKey(Roles, null=True, blank=True, on_delete= models.DO_NOTHING)
+    
+    def __str__(self):
+        return self.first_name
 # Create your models here.
