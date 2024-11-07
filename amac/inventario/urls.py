@@ -6,10 +6,8 @@ from inventario.views import *
 urlpatterns = [
     path('productos/',productos, name="productos"),
     path('agregarTipo/',addTipo, name="addTipo"),
-    path('agregarProducto/',agregarProducto, name="addProduct"),
-
-    # path('editarUsuario/<int:id>',editUser, name="editUser"),
-    # path('eliminarUsuario/<int:id>',deleteUser, name="editUser"),
-
+    path('agregarProducto/',agregarProducto, name="addProduct"), 
+    path('editarProducto/<int:id>',editProduct, name="editProduct"),
+    path('eliminarProducto/<int:id>',deleteProduct, name="deleteProduct"),
 
 ]

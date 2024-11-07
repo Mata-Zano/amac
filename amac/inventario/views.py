@@ -49,5 +49,30 @@ def agregarProducto(request):
         }
     return render(request, 'agregarP.html',data)
   
+  
+@login_required
+def editProduct(request, id):
+    producto = Producto.objects.get(id = id)
+    inventario = Inventario.objects.get(producto = producto)
+
+    inventario_form = InventarioForm(instance=inventario)
+    producto_form = ProductoForm(instance=producto)
+    if request.method == 'POST' :
+        inventario_form = InventarioForm(request.POST, instance=inventario)
+        producto_form = ProductoForm(request.POST, instance=producto)
+        if producto_form.is_valid() and inventario_form.is_valid():
+            inventario_form.save()
+            producto_form.save()
+        return redirect('/')
+    data = {'producto_form':producto_form,
+            'inventario_form':inventario_form}
+    return render(request, 'agregarP.html', data)
+
+
+@login_required
+def deleteProduct(request, id):
+    producto = Producto.objects.get(id = id)
+    producto.delete()
+    return redirect('/')
 
 # Create your views here.

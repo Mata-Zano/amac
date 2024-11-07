@@ -13,21 +13,26 @@
         <thead>
             <tr>
                 <th>Nombe</th>
-                <th>Stock</th>
+                <th>Descripcion</th>
                 <th>Fecha Ingreso</th>
                 <th>Fecha Vencimiento</th>
+                <th>Stock</th>
+                <th>Stock Minimo</th>
+
             </tr>
         </thead>
         <tbody>
             {% for producto in productos %}
             <tr>
-                <td>{{ producto.producto.id }}</td>
-                <td>{{ producto.stock }}</td>
+                <td>{{ producto.producto.nombre }}</td>
+                <td>{{ producto.producto.descripcion }}</td>
                 <td>{{ producto.fecha_ingreso }}</td>
                 <td>{{ producto.fecha_vencimiento }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.stock_minimo }}</td>
                 <td></td>
-                <td><a href="/editarUsuario/{{ usuario.id }}"> EDITAR </a></td>
-                <td><a href="/eliminarUsuario/{{ usuario.id }}"> ELIMINAR </a></td>
+                <td><a href="/editarProducto/{{ producto.id }}"> EDITAR </a></td>
+                <td><a href="/eliminarProducto/{{ producto.id }}"> ELIMINAR </a></td>
             </tr>
             {% endfor %}
         </tbody>
