@@ -1,36 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>AMAC Spa - Mantención Mecánica</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #f60;
+            height: 100vh;
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .sidebar h1 {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+
+        }
+        .sidebar a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .data-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .data-section h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        .actions a {
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+        }
+        .edit-btn {
+            background-color: #2980b9;
+        }
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+    
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; 
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 10px;
+            }
+            .sidebar h1 {
+                display: none; 
+            }
+            .sidebar a {
+                font-size: 14px; 
+                margin: 0;
+                justify-content: center;
+            }
+            .sidebar a i {
+                margin-right: 5px;
+            }
+            .content {
+                padding: 10px; 
+            }
+        }
+    
+        @media (max-width: 576px) {
+            .data-section {
+                padding: 15px; 
+            }
+            .actions a {
+                font-size: 12px; 
+                padding: 8px 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Listado de Usuarios</h1>
-    {% if usuarios %}
-    <table>
-        <thead>
-            <tr>
-                <th>Nombe</th>
-                <th>Apellido</th>
-                <th>Rol</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="sidebar">
+        <h1>Amac Spa</h1>
+        <a href="{% url 'User' %}"><i class="fas fa-user"></i>Usuarios</a>
+        <a href="#"><i class="fas fa-briefcase"></i>Roles</a>
+        <a href="#"><i class="fas fa-book"></i>Reportes</a>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1>Gestión de Usuarios</h1>
+            <h2>MANTENCIÓN MECÁNICA</h2>
+            <a href="{% url 'addUser' %}" class="add-user-btn">+ Agregar Usuario</a>
+        </div>
+        <div class="data-sections-container">
             {% for usuario in usuarios %}
-            <tr>
-                <td>{{ usuario.first_name }}</td>
-                <td>{{ usuario.last_name }}</td>
-                <td>{{ usuario.rol_id }}</td>
-                <td></td>
-                <td><a href="/editarUsuario/{{ usuario.id }}"> EDITAR </a></td>
-                <td><a href="/eliminarUsuario/{{ usuario.id }}"> ELIMINAR </a></td>
-            </tr>
+            <div class="data-section">
+                <h3>{{ usuario.nombre }}</h3>
+                <div class="data-item">
+                    <span>Email:</span>
+                    <span>{{ usuario.email }}</span>
+                </div>
+                <div class="data-item">
+                    <span>Rol:</span>
+                    <span>{{ usuario.rol }}</span>
+                </div>
+                <div class="actions">
+                    <a href="/editarUsuario/{{ usuario.id }}" class="edit-btn">Editar</a>
+                    <a href="/eliminarUsuario/{{ usuario.id }}" class="delete-btn" onclick="return confirm('¿Estás seguro de eliminar este usuario?');">Eliminar</a>
+                </div>
+            </div>
             {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-    <h2></h2>
-    {% endif %}
+        </div>
+    </div>
 </body>
 </html>
