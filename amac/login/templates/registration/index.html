@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <title>Amac Spa - Mantención Mecánica</title>
+    <script src="{% static 'js/index.js' %}"></script>
+    <title>AmacSpa - Mantenimiento Mecanico</title>
     <style>
         
     </style>
@@ -14,44 +15,39 @@
 <body>
     <div class="sidebar">
         <div class="logo">
-            <img src="{% static 'img/logo.PNG' %}" alt="Amac Spa">
+            <img src="{% static 'img/logo.PNG' %}" alt="AmacSpa">
         </div>
-        <h2>{{user.first_name}} {{user.last_name}}</h2>
-        <h3>{{user.rol}}</h3>
-        <a href="{% url 'salir' %}"><i class="fas fa-star"></i>logaut</a>
-
+        <h2>{{user.firstName}} {{user.lastName}}</h2>
+        <h3>{{user.role}}</h3>
+        <a href="{% url 'salir' %}"><i class="fas fa-star"></i>Logout</a>
     </div>
     <div class="content">
-        <div class="data-sections-container">
-            <a href="/fichas" class="header-link">
-                <h1>Fichas Electrónicas</h1>
-                <div class="notification-badge">3</div> <!-- Notificación de ejemplo -->
+        <div class="dataSectionsContainer">
+            <a href="/Vehiculo" class="headerLink" data-bg-image="{% static 'image/material.jpg' %}">
+                <h1>Vehiculo</h1>
+                <div class="notificationBadge">3</div>
             </a>
-            <a href="/tareas" class="header-link">
+            <a href="/Tareas" class="headerLink" data-bg-image="{% static 'image/tareas.png' %}">
+                <h1>Fichas Electronicas</h1>
+                <div class="notificationBadge">1</div>
+            </a>
+            <a href="/Clientes" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
                 <h1>Tareas</h1>
-                <div class="notification-badge">1</div> <!-- Notificación de ejemplo -->
             </a>
-            <a href="/clientes" class="header-link">
+            <a href="/" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
+                <h1>Reportes</h1>
+            </a>
+            <a href="/clientes" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
                 <h1>Clientes</h1>
-                <!-- Sin notificación -->
             </a>
-            <a href="/fichas" class="header-link">
-                <h1>Fichas Electrónicas</h1>
-                <div class="notification-badge">3</div> <!-- Notificación de ejemplo -->
+            <a href="/clientes" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
+                <h1>Personal</h1>
             </a>
-            <a href="/fichas" class="header-link">
-                <h1>Fichas Electrónicas</h1>
-                <div class="notification-badge">3</div> <!-- Notificación de ejemplo -->
+            <a href="/clientes" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
+                <h1>Inventario</h1>
             </a>
-            <a href="/fichas" class="header-link">
-                <h1>Fichas Electrónicas</h1>
-                <div class="notification-badge">3</div> <!-- Notificación de ejemplo -->
-            </a>
-            <a href="/fichas" class="header-link" >
-                <h1>Fichas Electrónicas</h1>
-                <div class="notification-badge">3</div> <!-- Notificación de ejemplo -->
-            </a>
-            <!-- Agrega los demás enlaces según necesites -->
+            <!-- Añadir más secciones según sea necesario -->
         </div>
+    </div>
 </body>
 </html>

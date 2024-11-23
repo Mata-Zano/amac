@@ -2,11 +2,10 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
     height: 100vh;
+    overflow: hidden;
 }
+
 .sidebar {
     width: 150px;
     background-color: #f60;
@@ -19,11 +18,7 @@ body {
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
 }
-.sidebar h1 {
-    font-size: 26px;
-    margin-bottom: 40px;
-    font-weight: 700;
-}
+
 .sidebar a {
     color: #ffffff;
     text-decoration: none;
@@ -35,23 +30,24 @@ body {
     padding: 10px 15px;
     border-radius: 8px;
 }
+
 .sidebar a:hover {
     background-color: #ff8400;
-    color: #ffffff;
 }
+
 .sidebar a i {
     margin-right: 12px;
 }
+
 .content {
-    margin-left: 220px;
+    margin-left: 180px;
     padding: 60px;
     box-sizing: border-box;
     overflow: auto;
-    align-items: center;
-    transition: margin-left 0.3s ease, width 0.3s ease;
+    transition: margin-left 0.3s ease;
 }
+
 .header {
-    height: 60px;
     width: 40%;
     min-width: 300px;
     text-align: center;
@@ -69,13 +65,8 @@ body {
     font-weight: 700;
     color: #333;
 }
-.header h2 {
-    margin: 10px 0;
-    font-size: 18px;
-    font-weight: 400;
-    color: #7f8c8d;
-}
-.data-sections-container {
+
+.dataSectionsContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
@@ -84,96 +75,15 @@ body {
     padding: 0 10px;
     box-sizing: border-box;
 }
-.data-section {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    flex: 1 1 calc(40% - 20px);
-    box-sizing: border-box;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-.data-section:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-}
-.data-section h3 {
-    margin-top: auto;
-    font-size: 22px;
-    font-weight: 600;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 15px;
-    color: #333;
-}
 
-.data-item span {
-    font-weight: bold;
-    color: #555;
-}
-@media (max-width: 768px) {
-    .sidebar {
-        width: 170px;
-        padding: 20px;
-    }
-    .content {
-        margin-left: 180px;
-        padding: 40px;
-        width: calc(100% - 180px);
-    }
-    .header h1 {
-        font-size: 26px;
-    }
-    .header h2 {
-        font-size: 16px;
-    }
-    .data-section {
-        flex: 1 1 100%;
-    }
-}
-@media (max-width: 576px) {
-    .sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        padding: 15px;
-    }
-    .content {
-        margin-left: 0;
-        width: 100%;
-        padding: 20px;
-    }
-    .data-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .data-item span {
-        margin-bottom: 5px;
-    }
-    .header {
-        padding: 60px;
-        width: 90%;
-    }
-    .header h1 {
-        font-size: 24px;
-    }
-    .header h2 {
-        font-size: 14px;
-    }
-}
-
-.header-link {
+.headerLink {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 30%;
     min-width: 250px;
-    height: 150px; /* Ajustar la altura para acomodar el fondo */
-    background-color: #ffffff;
-    background-image: url('../image/logo.PNG'); /* Ajusta la ruta a la imagen que hayas cargado */
-    background-size: cover;
-    background-position: center;
+    height: 150px;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -183,22 +93,13 @@ body {
     color: #333;
 }
 
-.header-link:hover {
-    background-color: rgba(255, 132, 0, 0.8); /* Capa de color al pasar el ratón */
+.headerLink:hover {
+    background-color: rgba(255, 132, 0, 0.8);
     color: white;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.header-link h1 {
-    z-index: 1; /* Para que el texto esté encima del fondo */
-    margin: 0;
-    font-size: 28px;
-    font-weight: 700;
-    color: inherit;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Un poco de sombra para destacar sobre el fondo */
-}
-
-.notification-badge {
+.notificationBadge {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -212,25 +113,38 @@ body {
 }
 
 @media (max-width: 768px) {
-    .header-link {
+    .sidebar {
+        width: 170px;
+        padding: 20px;
+    }
+    .content {
+        margin-left: 180px;
+        padding: 40px;
+    }
+    .headerLink {
         width: 80%;
         height: 120px;
-    }
-    .header-link h1 {
-        font-size: 24px;
     }
 }
 
 @media (max-width: 576px) {
-    .header-link {
+    .sidebar {
+        position: relative;
         width: 100%;
-        padding: 40px;
+        height: auto;
+        padding: 15px;
+    }
+    .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+    .headerLink {
+        width: 100%;
         height: 100px;
+        padding: 40px;
     }
-    .header-link h1 {
-        font-size: 20px;
-    }
-    .notification-badge {
+    .notificationBadge {
         font-size: 12px;
         padding: 3px 8px;
     }
