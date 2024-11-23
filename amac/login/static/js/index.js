@@ -17,3 +17,24 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mensaje de bienvenida
     alert("Hola");
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".sidebar-item");
+    let currentItem = 0;
+
+    const showItem = (index) => {
+        items.forEach((item, i) => {
+            item.style.display = i === index ? "block" : "none";
+        });
+    };
+
+    const nextItem = () => {
+        currentItem = (currentItem + 1) % items.length;
+        showItem(currentItem);
+    };
+
+    // Mostrar el primer elemento
+    showItem(currentItem);
+
+    // Cambiar de elemento cada 5 segundos
+    setInterval(nextItem, 5000);
+});

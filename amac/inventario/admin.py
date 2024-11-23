@@ -22,3 +22,6 @@ class InventarioAdmin(admin.ModelAdmin):
     ordering = ('producto',)
 
 admin.site.register(Inventario, InventarioAdmin)
+
+admin.site.register(Proveedor)
+admin.site.register(modelo)

@@ -7,7 +7,7 @@ from django.db import transaction
 
 @login_required
 def productos (request):
-    productos = Inventario.objects.all()
+    productos = Producto.objects.all()
     data = {'productos': productos}
     return render(request, 'listadoP.html',data)
 
@@ -15,7 +15,7 @@ def productos (request):
 def addTipo (request):
     form = TipoForm()
     if request.method == 'POST' :
-        form = TipoForm(request.POST)
+        form = TipoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
         return redirect('/')

@@ -2,8 +2,8 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     background-color: #f4f4f4;
-    height: 100vh;
-    overflow: hidden;
+    color: #333;
+    line-height: 1.6;
 }
 
 .sidebar {
@@ -19,24 +19,31 @@ body {
     z-index: 1000;
 }
 
-.sidebar a {
+.logo-img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+.sidebar-link {
     color: #ffffff;
     text-decoration: none;
-    margin: 20px 0;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    transition: color 0.3s ease, background-color 0.3s ease;
-    padding: 10px 15px;
-    border-radius: 8px;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.3s;
 }
-
-.sidebar a:hover {
-    background-color: #ff8400;
+.sidebar-link:hover {
+    color: #ffdd99;
 }
-
-.sidebar a i {
-    margin-right: 12px;
+.logout-link {
+    color: #ffffff;
+    text-decoration: none;
+    margin-top: 10px;
+    display: inline-block;
+    transition: color 0.3s;
+}
+.logout-link:hover {
+    color: #ffdd99;
 }
 
 .content {
@@ -148,4 +155,27 @@ body {
         font-size: 12px;
         padding: 3px 8px;
     }
+}
+
+.sidebar-container {
+    width: 300px;
+    margin: 0;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+}
+.sidebar-item {
+    display: none;
+}
+.sidebar-item h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.sidebar-item p {
+    font-size: 16px;
 }
