@@ -11,11 +11,11 @@ class TipoForm(forms.ModelForm):
 class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
-        fields = ['tipo', 'nombre', 'descripcion']
+        fields = ['tipo', 'nombre', 'descripcion','imagen'] 
 
 
 class InventarioForm(forms.ModelForm):
     class Meta:
         model = Inventario
-        fields = ['stock', 'fecha_ingreso', 'fecha_vencimiento', 'stock_minimo']
+        fields = ['stock', 'fechaIngreso', 'fechaVencimiento', 'stockMinimo']
         

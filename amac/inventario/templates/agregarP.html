@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Agregar Producto</h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ producto_form.as_p }}
         {{ inventario_form.as_p }}

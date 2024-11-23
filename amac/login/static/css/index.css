@@ -1,0 +1,138 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.sidebar {
+    width: 150px;
+    background-color: #f60;
+    position: fixed;
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.sidebar h1 {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+.sidebar a {
+    color: #ecf0f1;
+    text-decoration: none;
+    margin: 15px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+.sidebar a i {
+    margin-right: 10px;
+}
+.content {
+    margin-left: 270px;
+    padding: 40px;
+    width: calc(100% - 270px);
+    box-sizing: border-box;
+    overflow: auto;
+    align-items: center;
+}
+.header {
+    width: 30%;
+    min-width: 250px;
+    text-align: center;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+.header h2 {
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: #7f8c8d;
+}
+.data-sections-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 5%;
+}
+.data-section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    flex: 1 1 calc(45% - 20px);
+    box-sizing: border-box;
+    justify-content: center;
+}
+.data-section h3 {
+    margin-top: 0;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.data-item span {
+    font-weight: bold;
+}
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .content {
+        margin-left: 220px;
+        padding: 20px;
+        width: calc(100% - 220px);
+    }
+    .header h1 {
+        font-size: 24px;
+    }
+    .header h2 {
+        font-size: 14px;
+    }
+    .data-section {
+        flex: 1 1 100%;
+    }
+}
+@media (max-width: 576px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+    .content {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+    .data-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .data-item span {
+        margin-bottom: 5px;
+    }
+    .header {
+        padding: 80px;
+    }
+    .header h1 {
+        font-size: 22px;
+    }
+    .header h2 {
+        font-size: 12px;
+    }
+}

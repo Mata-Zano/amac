@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Amac Spa - Mantención Mecánica</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{% static 'img/logo.PNG' %}" alt="Amac Spa">
+        </div>
+        <h2>{{user.first_name}} {{user.last_name}}</h2>
+        <h3>{{user.rol}}</h3>
+        <a href="{% url 'salir' %}"><i class="fas fa-star"></i>logaut</a>
+
+    </div>
+    <div class="content">
+        <div class="header">
+            <h3>Personal</h3>
+        </div>
+
+        <div class="data-sections-container">
+            <div class="data-section">
+                    <h3>Personal</h3>
+            </div>
+        
+            <div class="data-section">
+                <h3>vehiculos</h3>
+                <div class="data-item">
+                </div>
+                <div class="data-item">
+                </div>
+            </div><div class="data-section">
+                <h3>Clientes</h3>
+                <div class="data-item">
+                </div>
+                <div class="data-item">
+                </div>
+            </div><div class="data-section">
+                <h3>Inventario</h3>
+                <div class="data-item">
+                </div>
+                <div class="data-item">
+                </div>
+            </div><div class="data-section">
+                <h3>Fichas electronicas</h3>
+                <div class="data-item">
+                </div>
+                <div class="data-item">
+                </div>
+            </div><div class="data-section">
+                <h3>Tareas</h3>
+                <div class="data-item">
+                </div>
+                <div class="data-item">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
