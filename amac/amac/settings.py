@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-cs)0m9f8d#+6*)i+4zb72^xq(=bd*zwkqf#!hk0&m8fu3u6v)r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['amac-app-b73fdc231a55.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -82,11 +82,11 @@ import pymysql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'amac',
-        'USER': 'root',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        # 'NAME':'amac',
+        # 'USER': 'root',
+        # 'PASSWORD': 'admin',
+        # 'HOST': 'localhost',
+        # 'PORT': '3306',
 
     }
 }
@@ -130,7 +130,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS =[]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-os.makedirs(STATIC_ROOT, exist_ok=True)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
