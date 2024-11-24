@@ -1,1 +1,1 @@
-web: gunicorn amac.wsgi --log
+web: gunicorn amac.wsgi --log-file -
