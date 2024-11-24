@@ -38,14 +38,10 @@ class Producto(models.Model):
     marca = models.CharField(max_length=100,null=True)
     modeloCompatible = models.ManyToManyField(modelo)
     unidadMedida = models.CharField(max_length=100,null=True)
-    limiteGarantia = models.DateField(null=True)
     imagen = models.ImageField(blank=True, upload_to='productos/')
-    Proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True)
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True)
 
-    def delete(self, *args, **kwargs):
-        if os.path.isfile(self.imagen.path):
-            os.remove(self.imagen.path)
-        super(Producto, self).delete(*args, **kwargs)
+
 
     def verificarCompatibilidad(self, modelo):
         if modelo in self.modeloCompatible:
@@ -60,17 +56,18 @@ class Producto(models.Model):
 class Inventario(models.Model):
     producto = models.OneToOneField(Producto, on_delete=models.CASCADE)
     stock = models.IntegerField(null=True)
-    fechaIngreso = models.DateField(null=True)
+    fechaIngreso = models.DateField(auto_now_add=True ,null=True)
     fechaVencimiento = models.DateField(null=True)
     stockMinimo = models.IntegerField(default=0)
     ultimaSalida = models.DateField(null=True)
     ubicacion = models.CharField(max_length=250, null=True )
-    Estado = models.BooleanField(default=False)
+    estado = models.BooleanField(default=True)
 
 
     
-    def __str__(self):
-        return f"Inventario de {self.producto.nombre}"
 
+    def __str__(self):
+        estado_str = "Disponible" if self.estado else "No disponible"
+        return f"Inventario de {self.producto.nombre} - {estado_str}"
 
 # Create your models here.
