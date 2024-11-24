@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cs)0m9f8d#+6*)i+4zb72^xq(=bd*zwkqf#!hk0&m8fu3u6v)r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'amac.urls'
@@ -125,9 +126,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS =[os.path.join(BASE_DIR,'static')]
+STATIC_URL = '/static/'
+STATICFILES_DIRS =[]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+os.makedirs(STATIC_ROOT, exist_ok=True)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Default primary key field type
@@ -143,4 +147,3 @@ LOGOUT_REDIRECT_URL = 'home'
 
 AUTH_USER_MODEL = 'usuarios.User'
 
-print(os.path.join(BASE_DIR, 'static'))
