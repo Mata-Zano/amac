@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+</head>
+<body>
+    <h1>Inventario</h1>
+    {% if productos %}
+    <!-- <h3><a href = {% url 'addUser' %} >Agregar un nuevo Usuario</a></h3> -->
+    <table>
+        <thead>
+            <tr>
+                <th>Nombe</th>
+                <th>Descripcion</th>
+                <th>Fecha Ingreso</th>
+                <th>Fecha Vencimiento</th>
+                <th>Stock</th>
+                <th>Stock Minimo</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.producto.nombre }}</td>
+                <td>{{ producto.producto.descripcion }}</td>
+                <td>{{ producto.fecha_ingreso }}</td>
+                <td>{{ producto.fecha_vencimiento }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.stock_minimo }}</td>
+                <td></td>
+                <td><a href="/editarProducto/{{ producto.id }}"> EDITAR </a></td>
+                <td><a href="/eliminarProducto/{{ producto.id }}"> ELIMINAR </a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h2>No sean ingresado ningún producto </h2>
+    {% endif %}
+    <h4><a href={% url 'addTipo' %}>Agregar Tipo de prodcuto</a></h4>
+    <h4><a href={% url 'addProduct' %}>Agregar Producto</a></h4>
+    <h4><a href={% url 'home' %}>Devolverse</a></h4>
+</body>
+</html>

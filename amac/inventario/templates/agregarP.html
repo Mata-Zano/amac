@@ -6,12 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Agregar Usuario</h1>
+    <h1>Agregar Producto</h1>
     <form action="" method="post">
-        {{ form.as_p }}
         {% csrf_token %}
-        <input type="submit" value=" Agregar Usuario">
+        {{ producto_form.as_p }}
+        {{ inventario_form.as_p }}
+        <input type="submit" value=" Agregar Producto">
     </form>
-    <h4><a href={% url 'User' %}>Devolverse</a></h4>
+    <h4><a href={% url 'productos' %}>Devolverse</a></h4>
 </body>
 </html>

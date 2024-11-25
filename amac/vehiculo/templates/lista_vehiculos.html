@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Vehículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .vehicle {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+            text-align: left;
+        }
+        .vehicle:last-child {
+            border-bottom: none;
+        }
+        .btn-back {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            margin: 20px auto;
+            width: 100%;
+        }
+        .btn-back:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de Vehículos</h2>
+        {% for vehiculo in vehiculos %}
+            <div class="vehicle">
+                <p><strong>Descripción:</strong> {{ vehiculo.}}
+                <p><strong>Año:</strong> {{ vehiculo.anio_fabricacion }}</p>   
+                <p><strong>Color:</strong> {{ vehiculo.color }}</p>
+                <p><strong>Kilometraje:</strong> {{ vehiculo.kilometraje }}</p>
+                <p><strong>Patente:</strong> {{ vehiculo.patente }}</p>
+                <p><strong>Número de Chasis:</strong> {{ vehiculo.num_chasis}}</p>
+                <p><strong>Número de Motor:</strong> {{ vehiculo.num_motor }}</p>
+                <p><strong>Estado:</strong> {{ vehiculo.estado }}</p>
+                <p><strong>Modelo:</strong> {{ vehiculo.modelo.nombre }}</p>
+                <p><strong>Marca:</strong> {{ vehiculo.marca.nombre }}</p>
+               
+            </div>
+        {% endfor %}
+        <button type="button" class="btn-back" onclick="window.location.href='/'">Regresar</button>
+    </div>
+</body>
+</html>
