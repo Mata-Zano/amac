@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cs)0m9f8d#+6*)i+4zb72^xq(=bd*zwkqf#!hk0&m8fu3u6v)r'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['amac-app-b73fdc231a55.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'login',
-    'usuarios'
+    'usuarios',
+    'vehiculo',
+    'inventario',
 ]
 
 MIDDLEWARE = [

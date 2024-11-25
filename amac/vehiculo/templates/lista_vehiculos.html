@@ -44,6 +44,7 @@
     </style>
 </head>
 <body>
+    {% if vehiculo %}
     <div class="container">
         <h2>Lista de Vehículos</h2>
         {% for vehiculo in vehiculos %}
@@ -63,5 +64,11 @@
         {% endfor %}
         <button type="button" class="btn-back" onclick="window.location.href='/'">Regresar</button>
     </div>
+    {% else %}
+    <div class="container">
+        <h2>No hay vehículos registrados</h2>
+        <button type="button" class="btn-back" onclick="window.location.href='/'">Regresar</button>
+    </div>
+    {% endif %}
 </body>
 </html>
