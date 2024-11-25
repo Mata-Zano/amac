@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 # Create your views here.
 @login_required
 def home (request):
-    return render(request, 'index.html')
+    return render(request, 'registration/index.html')
 
 def salir(request):
     logout(request)

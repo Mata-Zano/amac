@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
-    {% load static %}
+{% load static %}
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ingreso.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - AMAC SPA</title>
 </head>
 <body>
     <div class="login-container">
         <div class="login-header">
-            <div class="logo">
-                <img src="{% static 'image/logo.jpg' %}" alt="logo">
-            </div>
+            <img src="{% static 'image/logo.PNG' %}" alt="logo" class="img">
         </div>
         <div class="login-form">
-            <h2>Amac. spa</h2>
-            <p>MANTENCIÓN MECÁNICA</p>
             <form action="" method="post">
                 {% csrf_token %}
-                <input type="text" placeholder="USUARIO" name="username">
-                <input type="password" placeholder="CONTRASEÑA" name="password">
-                <button type="submit">ENTRAR</button>
+                <div>
+                    <input type="text" placeholder="USUARIO" name="username">
+                    <input type="password" placeholder="CONTRASEÑA" name="password" autocomplete="current-password">
+                </div>
+                <br/>
+                <div>
+                    <button type="submit">ENTRAR</button>
+                </div>
             </form>
         </div>
     </div>

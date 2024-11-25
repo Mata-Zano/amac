@@ -4,7 +4,7 @@ from inventario.views import *
 
 
 urlpatterns = [
-    path('productos/',productos, name="productos"),
+    path('inventario/',productos, name="inventario"),
     path('agregarTipo/',addTipo, name="addTipo"),
     path('agregarProducto/',agregarProducto, name="addProduct"), 
     path('editarProducto/<int:id>',editProduct, name="editProduct"),

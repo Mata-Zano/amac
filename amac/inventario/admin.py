@@ -16,9 +16,12 @@ class ProductoAdmin(admin.ModelAdmin):
 admin.site.register(Producto, ProductoAdmin)
 
 class InventarioAdmin(admin.ModelAdmin):
-    list_display = ('producto', 'stock', 'fecha_ingreso', 'fecha_vencimiento', 'stock_minimo')
-    list_filter = ('fecha_ingreso', 'fecha_vencimiento')
+    list_display = ('producto', 'stock', 'fechaIngreso', 'fechaVencimiento', 'stockMinimo')
+    list_filter = ('fechaIngreso', 'fechaVencimiento')
     search_fields = ('producto__nombre',)
     ordering = ('producto',)
 
 admin.site.register(Inventario, InventarioAdmin)
+
+admin.site.register(Proveedor)
+admin.site.register(modelo)

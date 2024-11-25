@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Agregar Tipo</h1>
-    <form action="" method="post">
-        {{ form.as_p }}
+
+<div class="agregarproducto-form-container">
+    <form method="POST" action="{% url 'addTipo' %}">
+        <h1 class="agregarproducto-form-title">Agregar Tipo de Producto</h1>
         {% csrf_token %}
-        <input type="submit" value=" Agregar Tipo">
+
+        {% for field in tipo_form %}
+        <div class="agregarproducto-form-group">
+            <label class="agregarproducto-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if request.method == 'POST' %}
+                {% for error in field.errors %}
+                <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="submit-button">
+            <button type="submit" class="agregarproducto-button">Agregar Tipo de Producto</button>
+        </div>
     </form>
-    <h4><a href={% url 'productos' %}>Devolverse</a></h4>
-</body>
-</html>
+    <h4><a href="{% url 'inventario' %}" ><i class="fas fa-arrow-left"></i> Volver</a></h4>
+
+</div>
