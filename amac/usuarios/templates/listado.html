@@ -130,12 +130,14 @@
         <a href="#"><i class="fas fa-briefcase"></i>Roles</a>
         <a href="#"><i class="fas fa-book"></i>Reportes</a>
     </div>
+    
     <div class="content">
         <div class="header">
             <h1>Gestión de Usuarios</h1>
             <h2>MANTENCIÓN MECÁNICA</h2>
             <a href="{% url 'addUser' %}" class="add-user-btn">+ Agregar Usuario</a>
         </div>
+        {% if usuario %}
         <div class="data-sections-container">
             {% for usuario in usuarios %}
             <div class="data-section">
