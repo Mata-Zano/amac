@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'usuarios',
-    'inventario'
+    'inventario',
+    'vehiculo',
 ]
 
 MIDDLEWARE = [
@@ -80,16 +81,14 @@ WSGI_APPLICATION = 'amac.wsgi.application'
 
 import pymysql
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':'amac',
-        'USER': 'root',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '3306',
 
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "mydatabase",
     }
 }
+     
+
 
 
 # Password validation
