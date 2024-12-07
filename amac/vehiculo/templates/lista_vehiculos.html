@@ -1,74 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Vehículos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 80%;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-        .vehicle {
-            border-bottom: 1px solid #ccc;
-            padding: 10px 0;
-            text-align: left;
-        }
-        .vehicle:last-child {
-            border-bottom: none;
-        }
-        .btn-back {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            display: block;
-            margin: 20px auto;
-            width: 100%;
-        }
-        .btn-back:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel='stylesheet' href="{% static 'css/inventario.css' %}"  type="text/css">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" type=" text/css">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}" type=" text/css">
+    <script src="{% static 'js/vehiculo.js' %}" defer></script>
+    <title>AmacSpa - Vehiculos</title>
 </head>
 <body>
-    {% if vehiculo %}
-    <div class="container">
-        <h2>Lista de Vehículos</h2>
-        {% for vehiculo in vehiculos %}
-            <div class="vehicle">
-                <p><strong>Descripción:</strong> {{ vehiculo.}}
-                <p><strong>Año:</strong> {{ vehiculo.anio_fabricacion }}</p>   
-                <p><strong>Color:</strong> {{ vehiculo.color }}</p>
-                <p><strong>Kilometraje:</strong> {{ vehiculo.kilometraje }}</p>
-                <p><strong>Patente:</strong> {{ vehiculo.patente }}</p>
-                <p><strong>Número de Chasis:</strong> {{ vehiculo.num_chasis}}</p>
-                <p><strong>Número de Motor:</strong> {{ vehiculo.num_motor }}</p>
-                <p><strong>Estado:</strong> {{ vehiculo.estado }}</p>
-                <p><strong>Modelo:</strong> {{ vehiculo.modelo.nombre }}</p>
-                <p><strong>Marca:</strong> {{ vehiculo.marca.nombre }}</p>
-               
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <div id="modalFormContent"></div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{% static 'image/logo.PNG' %}" alt="AmacSpa" class="logo-img">
+        </div>
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <h3>{{ user.rol }}</h3>
+        <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-car"></i> Vehículo</a>
+        <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-file-alt"></i> Fichas Electrónicas</a>
+        <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-tasks"></i> Tareas</a>
+        <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-chart-bar"></i> Reportes</a>
+        <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-users"></i> Clientes</a>
+        <a href="{% url 'User' %}" class="sidebar-link"><i class="fas fa-user"></i> Personal</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-boxes"></i> Inventario</a>
+        <a href="{% url 'home' %}" class="sidebar-link"><i class="fas fa-arrow-left"></i> Volver</a>
+        <a href="{% url 'salir' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    
+    <div class="content">
+        <h1>Listado de Vehiculos</h1>
+        <div class="actions-top"> 
+            <div class="search-container">
+                <input type="text" placeholder="Buscar vehiculo..." class="search-input">
+                <select class="category-filter">
+                    <option value="">Filtrar por marca</option>
+                    {% if  marcas %}
+
+                    {% for marca in marcas %}
+                    <option value="{{ marcas.id }}">{{ marca.nombre }}</option>
+                    {% endfor %}
+                    
+                    {% else %}
+                    <option value="SN"> Sin Marcas </option>
+                    {% endif %}
+                </select>
             </div>
-        {% endfor %}
-        <button type="button" class="btn-back" onclick="window.location.href='/'">Regresar</button>
+            <div class="buttons-right">
+                <!-- <button href="" class="button small-button" id="myBtn" ><i class="fas fa-plus-circle"></i> Agregar Tipo de Producto</button> -->
+                <button href="" class="button small-button" id="myBtn2" ><i class="fas fa-plus-circle"></i> Agregar Vehiculo</button>
+                <button href="" class="button small-button" id="myBtn" ><i class="fas fa-plus-circle"></i> Agregar Marca</button>
+                <button href="" class="button small-button" id="myBtn3" ><i class="fas fa-plus-circle"></i> Agregar Modelo</button>
+            </div>
+        </div>
+        {% if vehiculos %}
+        <div class="horizontal-list-container">
+            {% for vehiculo in vehiculos %}
+            <div class="horizontal-product-item">
+                <!-- {% if vehiculos.imagen %} -->
+                <!-- <img src="{{ vehiculos.imagen.url }}" alt="{{ vehiculos.nombre }}" class="product-img-horizontal"> -->
+                <!-- {% else %} -->
+                <img src="{% static 'image/defecto.jpeg' %}" alt="{{ vehiculo.patente }}" class="product-img-horizontal">
+                <!-- {% endif %} -->
+                <div class="horizontal-product-details">
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>{{ vehiculo.nombre }}</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><strong>Modelo:</strong> {{ vehiculo.modelo.nombre }}</p>
+                                <p><strong>Marca:</strong> {{ vehiculo.marca.nombre }}</p>
+                                <p><strong>Año:</strong> {{ vehiculo.anio_fabricacion }}</p>  
+                                <p><strong>Kilometraje:</strong> {{ vehiculo.kilometraje }}</p>
+                                <p><strong>Patente:</strong> {{ vehiculo.patente }}</p>
+                            </td>
+                            <td>
+                                <p><strong>Descripción:</strong> {{ vehiculo.descripcion}}
+                                <p><strong>Color:</strong> {{ vehiculo.color }}</p>
+                                <p><strong>Número de Chasis:</strong> {{ vehiculo.num_chasis}}</p>
+                                <p><strong>Número de Motor:</strong> {{ vehiculo.num_motor }}</p>
+                                <p><strong>Estado:</strong> {{ vehiculo.estado }}</p>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="product-actions">
+                    <a href="/"  class="button small-button" id ><i class="fas fa-edit"></i> Editar</a> 
+                    <a class="action-link delete-link" id ='{{ vehiculo.id }}' data-id= '{{ vehiculo.patente }}' > <i class="fas fa-trash-alt"></i> Eliminar</a> 
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-list">
+            <h2 style="text-align: center;">No se ha ingresado ningún Vehiculo</h2>
+        </div>
+        {% endif %}  
     </div>
-    {% else %}
-    <div class="container">
-        <h2>No hay vehículos registrados</h2>
-        <button type="button" class="btn-back" onclick="window.location.href='/'">Regresar</button>
+    <div id="productoFormContainerP" style="display: none;">
+        {% include 'registro_vehiculo.html' %}
     </div>
-    {% endif %}
+    <div id="productoFormContainerMA" style="display: none;">
+        {% include 'formMarca.html' %}
+    </div>
+    <div id="productoFormContainerMO" style="display: none;">
+        {% include 'formModelo.html' %}
+    </div>
+    <!-- <div id="productoFormContainerT" style="display: none;">
+        {% include 'agregarT.html' %}
+    </div>         -->
 </body>
 </html>

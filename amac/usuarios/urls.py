@@ -23,7 +23,7 @@ urlpatterns = [
     path('usuarios/',user, name="User"),
     path('agregarUsuario/',addUser, name="addUser"),
     path('editarUsuario/<int:id>',editUser, name="editUser"),
-    path('eliminarUsuario/<int:id>',deleteUser, name="editUser"),
+    path('eliminarUsuario/<int:id>',deleteUser, name="delteUser"),
 
 
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from usuarios.models import User
+from usuarios.models import *
 from usuarios.forms import FormUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
@@ -9,16 +9,13 @@ from django.contrib import messages
 @login_required
 def user(request):
     usuarios = User.objects.all()
-    data = [
-        {
-            'id': usuario.id,
-            'nombre': f"{usuario.first_name} {usuario.last_name}",
-            'email': usuario.email,
-            'rol': usuario.rol.nombre if usuario.rol else "Sin asignar"
+    rol = Roles.objects.all()
+    data ={
+            'usuarios': usuarios,
+            'rols': rol
         }
-        for usuario in usuarios
-    ]
-    return render(request, 'listado.html', {'usuarios': data})
+    
+    return render(request, 'listado.html', data)
 
 @login_required
 def addUser (request):

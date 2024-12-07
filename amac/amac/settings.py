@@ -84,11 +84,11 @@ import pymysql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'amac',
+        'NAME': 'amac',
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': 3306,
 
     }
 }

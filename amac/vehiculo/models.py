@@ -35,7 +35,7 @@ class Modelo(models.Model):
         return f"Modelo: {self.nombre},  Tipo: {self.tipo}, Versión: {self.version}, Motor: {self.motor}"
 
     def actualizar_version(self, nueva_version):
-        self.version = nueva_version
+        self.version = nueva_version    
         self.save()
 
     def actualizar_motor(self, nuevo_motor):
@@ -50,7 +50,7 @@ class Vehiculo(models.Model):
     descripcion = models.CharField(max_length=50)
     anio_fabricacion = models.IntegerField()
     color = models.CharField(max_length=50)
-    Kilometraje = models.IntegerField()
+    kilometraje = models.IntegerField()
     patente = models.CharField(max_length=10)
     num_chasis = models.CharField(max_length=50)
     num_motor = models.CharField(max_length=50)

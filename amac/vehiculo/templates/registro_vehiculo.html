@@ -1,71 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Vehículo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 50%;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            background-color: #f60;
-            color: white;
-            padding: 10px;
-            margin: 0 -20px 20px -20px;
-        }
-        .section label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .section input, .section select {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .btn-submit, .btn-back {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            display: block;
-            margin: 10px auto;
-            width: 100%;
-        }
-        .btn-submit:hover, .btn-back:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="section">
-            <h2>REGISTRO DE VEHÍCULO</h2>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn-submit">Registrar</button>
-            </form>
-            <a type="button" class="btn-back" href="{% url 'vehiculo_lista' %}">Regresar</a>
+<div class="agregarproducto-form-container">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'registro_vehiculo' %}">
+        <h1 class="agregarproducto-form-title">Agregar Vehiculo</h1>
+        {% csrf_token %}
+        {% for field in vehiculo_form %}
+        <div class="agregarproducto-form-group">
+            <label class="agregarproducto-form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if request.method == 'POST' %}
+                {% for error in field.errors %}
+                <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
         </div>
-    </div>
-</body>
-</html>
+        {% endfor %}
+
+        <div class="submit-button">
+            <button type="submit" class="agregarproducto-button">Agregar Vehiculo</button>
+        </div>
+    </form>
+    <h4><a href="{% url 'vehiculo_lista' %}" ><i class="fas fa-arrow-left"></i> Volver</a></h4>
+
+</div>

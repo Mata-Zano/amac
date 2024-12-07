@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Mensaje de bienvenida
-    alert("Hola");
 });
 document.addEventListener("DOMContentLoaded", () => {
     const items = document.querySelectorAll(".sidebar-item");

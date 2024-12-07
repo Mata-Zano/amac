@@ -72,7 +72,7 @@ def editProduct(request, id):
         return redirect('/')
     data = {'producto_form':producto_form,
             'inventario_form':inventario_form}
-    return render(request, 'agregarP.html', data)
+    return render(request, 'editarP.html', data)
 
 
 @login_required

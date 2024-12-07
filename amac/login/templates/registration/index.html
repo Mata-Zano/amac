@@ -15,7 +15,7 @@
 <body>
     <div class="sidebar">
         <div class="logo">
-            <img src="{% static 'img/logo.PNG' %}" alt="AmacSpa" class="logo-img">
+            <img src="{% static 'image/logo.PNG' %}" alt="AmacSpa" class="logo-img">
         </div>
         <h2>{{ user.first_name }} {{ user.last_name }}</h2>
         <h3>{{ user.rol }}</h3>
@@ -23,27 +23,27 @@
     </div>
     <div class="content">
         <div class="dataSectionsContainer">
-            <a href="/Vehiculo" class="headerLink" data-bg-image="{% static 'image/material.jpg' %}">
-                <h1>Vehiculo</h1>
+            <a href="{% url 'vehiculo_lista' %}" class="headerLink" data-bg-image="{% static 'image/material.jpg' %}">
+                <h1 class="tituloVehiculo">Vehiculo</h1>
                 <div class="notificationBadge">3</div>
             </a>
-            <a href="/Tareas" class="headerLink" data-bg-image="{% static 'image/tareas.png' %}">
+            <a href="/" class="headerLink" data-bg-image="{% static 'image/ficha.jpg' %}">
                 <h1>Fichas Electronicas</h1>
                 <div class="notificationBadge">1</div>
             </a>
-            <a href="/Clientes" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
+            <a href="/" class="headerLink" data-bg-image="{% static 'image/tarea.jpg' %}">
                 <h1>Tareas</h1>
             </a>
-            <a href="/" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
+            <a href="/" class="headerLink" data-bg-image="{% static 'image/reporte.jpeg' %}">
                 <h1>Reportes</h1>
             </a>
-            <a href="/clientes" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
+            <a href="/" class="headerLink" data-bg-image="{% static 'image/cliente.jpeg' %}">
                 <h1>Clientes</h1>
             </a>
-            <a href="/clientes" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
+            <a href="{% url 'User' %}" class="headerLink" data-bg-image="{% static 'image/personal.jpg' %}">
                 <h1>Personal</h1>
             </a>
-            <a href="{% url 'inventario' %}" class="headerLink" data-bg-image="{% static 'image/clientes.png' %}">
+            <a href="{% url 'inventario' %}" class="headerLink" data-bg-image="{% static 'image/inventario.jpeg' %}">
                 <h1>Inventario</h1>
             </a>
             <!-- Añadir más secciones según sea necesario -->

@@ -16,9 +16,14 @@ Including another URLconf
 """
 
 from django.urls import path
-from .views import registro_vehiculo, lista_vehiculos
+from .views import *
 
 urlpatterns = [
     path('registro/', registro_vehiculo, name='registro_vehiculo'),
     path('lista/', lista_vehiculos, name='vehiculo_lista'),
+    path('addMarca/', addMarca , name='addMarca'),
+    path('addModelo/', addModelo , name='addModelo'),
+    # path('editarProducto/<int:id>',editProduct, name="editProduct"),
+    path('eliminarVehiculo/<int:id>',deleteVehiculo, name="deleteVehiculo"),
+
 ]
