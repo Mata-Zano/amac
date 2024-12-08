@@ -36,15 +36,23 @@ def addUser (request):
   
 @login_required
 def editUser(request, id):
-    usuario = User.objects.get(id = id)
+    usuario = User.objects.get(id=id)  
     form = FormUser(instance=usuario)
-    if request.method == 'POST' :
+
+    if request.method == 'POST':
         form = FormUser(request.POST, instance=usuario)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            password = form.cleaned_data.get('password')
+            if password:  # Si se proporciona una nueva contraseña
+                user.password = make_password(password)
+            user.save()
             messages.success(request, 'Usuario editado correctamente.')
-        return redirect('/')
-    data = {'form':form}
+            return redirect('/')  
+        else:
+            messages.error(request, 'Error al actualizar el usuario.')
+
+    data = {'form': form}
     return render(request, 'agregar.html', data)
 
 def deleteUser(request, id):

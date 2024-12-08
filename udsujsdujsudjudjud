@@ -1,0 +1,65 @@
+[33mcommit fd41388277788a39183b9ad741ea699d33ddc9c5[m[33m ([m[1;36mHEAD -> [m[1;32musuarios[m[33m, [m[1;31morigin/usuarios[m[33m)[m
+Author: Fabian <fabianrojas2d@gmail.com>
+Date:   Sat Nov 23 19:04:50 2024 -0300
+
+    CRUD Usuarios diseño y lógico mejorados
+
+[33mcommit 64930624bbadfe38d423a457483e2e016f2e90be[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Mon Oct 28 01:38:37 2024 -0300
+
+    Editar, Eliminar
+
+[33mcommit 3577553272ca49a918f55b88b92e5c2e39b2e937[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Mon Oct 28 01:18:51 2024 -0300
+
+    Agregar Usuario
+
+[33mcommit 09e62a71a4e09a178a5051046fdbc5e0bcf3c77a[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Mon Oct 28 00:31:50 2024 -0300
+
+    Listado creado
+
+[33mcommit cb16dcef4d83c941ac14dc9e95a5037c9d6cdd66[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Sun Oct 27 21:05:21 2024 -0300
+
+    Modificacion Usuario y Rol
+
+[33mcommit 4df40d6067a9bb4aa5f6fa6eabd8536cffc56a5c[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Sun Oct 27 20:45:15 2024 -0300
+
+    Modelo Rol
+
+[33mcommit 0a050c6dbbc3f84076be32ebe2b95e7e6d7d48c3[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Tue Oct 22 20:18:59 2024 -0300
+
+    Configuracion de BD
+
+[33mcommit e4b19ce2dc3580aaea7c2096b2ff5e74944484f6[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Tue Oct 22 19:26:04 2024 -0300
+
+    Creacion proyecto Django
+
+[33mcommit 9b00405d8052ff7b2af9073fb93b82a8ee746b1c[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Tue Oct 22 19:08:11 2024 -0300
+
+    Intalacion de framework
+
+[33mcommit 1cd81b24a8e7c03b4b2a11aa31e6117b51a8cf70[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Mon Oct 21 21:33:35 2024 -0300
+
+    env
+
+[33mcommit 0e41e662d8d008917ad9b121e37ab26ef4ada845[m
+Author: Mata-Zano <cupelt@hotmail.com>
+Date:   Mon Oct 21 21:05:16 2024 -0300
+
+    first commit
