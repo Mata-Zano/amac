@@ -1,0 +1,113 @@
+/* Container for the agregarproducto form */
+/* Ocultar el mensaje predeterminado de campo obligatorio */
+input:required,
+select:required {
+    box-shadow: none;
+    border-color: #ccc;
+}
+
+input:required:invalid,
+select:required:invalid {
+    border-color: #ccc; /* Opcional, quitar color de error */
+}
+
+.agregarproducto-form-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Title of the agregarproducto form */
+.agregarproducto-form-title {
+    text-align: center;
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form groups */
+.agregarproducto-form-group {
+    margin-bottom: 20px;
+}
+
+/* Labels */
+.agregarproducto-form-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* Text inputs, select dropdowns, textarea, and file inputs */
+.agregarproducto-input-text,
+.agregarproducto-input-number,
+.agregarproducto-input-date,
+.agregarproducto-input-file,
+.agregarproducto-select,
+.agregarproducto-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+/* Checkboxes and radio buttons */
+.agregarproducto-input-checkbox {
+    margin-right: 10px;
+}
+
+/* Add extra styling for checkbox lists */
+.agregarproducto-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.agregarproducto-checkbox-group .agregarproducto-form-label {
+    width: auto;
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+/* Button styles */
+.agregarproducto-button {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.agregarproducto-button:hover {
+    background-color: #0056b3;
+}
+
+/* Placeholder styling */
+.agregarproducto-input-text::placeholder,
+.agregarproducto-textarea::placeholder {
+    color: #999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .agregarproducto-form-container {
+        padding: 15px;
+    }
+
+    .agregarproducto-form-title {
+        font-size: 1.5em;
+    }
+
+    .agregarproducto-button {
+        width: 100%;
+    }
+}

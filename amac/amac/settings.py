@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+# prueba login
 
 from pathlib import Path
 import os
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-cs)0m9f8d#+6*)i+4zb72^xq(=bd*zwkqf#!hk0&m8fu3u6v)r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['amac-app-b73fdc231a55.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'login',
     'usuarios',
-
+    'vehiculo',
+    'inventario',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'amac.urls'
@@ -57,7 +61,7 @@ ROOT_URLCONF = 'amac.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR, 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,11 +84,11 @@ import pymysql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'amac',
+        'NAME': 'amac',
         'USER': 'root',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': 3306,
 
     }
 }
@@ -124,11 +128,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+MEDIA_ROOT = 'media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+STATICFILES_DIRS =[]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# VARIABLE DE REDIRECION DE LOGIN Y LOGOUT
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
 AUTH_USER_MODEL = 'usuarios.User'
+

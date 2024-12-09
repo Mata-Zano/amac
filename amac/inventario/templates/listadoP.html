@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel='stylesheet' href="{% static 'css/inventario.css' %}"  type="text/css">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" type=" text/css">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}" type=" text/css">
+    <script src="{% static 'js/inventario.js' %}" defer></script>
+    <title>AmacSpa - Inventario de Productos</title>
+</head>
+<body>    
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalFormContent"></div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{% static 'image/logo.PNG' %}" alt="AmacSpa" class="logo-img">
+        </div>
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <h3>{{ user.rol }}</h3>
+        <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-car"></i> Vehículo</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-file-alt"></i> Fichas Electrónicas</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-tasks"></i> Tareas</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-chart-bar"></i> Reportes</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-users"></i> Clientes</a>
+        <a href="{% url 'User' %}" class="sidebar-link"><i class="fas fa-user"></i> Personal</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-boxes"></i> Inventario</a>
+        <a href="{% url 'home' %}" class="sidebar-link"><i class="fas fa-arrow-left"></i> Volver</a>
+        <a href="{% url 'salir' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>          
+
+    
+    <div class="content">
+        <h1>Inventario</h1>
+        <div class="actions-top"> 
+            <div class="search-container">
+                <input type="text" placeholder="Buscar producto..." class="search-input">
+                <select class="category-filter">
+                    <option value="">Filtrar por categoría</option>
+                    {% for tipo in tipos %}
+                    <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="buttons-right">
+                <button href="" class="button small-button" id="myBtn" ><i class="fas fa-plus-circle"></i> Agregar Tipo de Producto</button>
+                <button href="" class="button small-button" id="myBtn2" ><i class="fas fa-plus-circle"></i> Agregar Producto</button>
+            </div>
+        </div>
+        {% if productos %}
+        <div class="horizontal-list-container">
+            {% for producto in productos %}
+            <div class="horizontal-product-item">
+                {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="product-img-horizontal">
+                {% else %}
+                <img src="{% static 'image/defecto.jpeg' %}" alt="{{ producto.nombre }}" class="product-img-horizontal">
+                {% endif %}
+                <div class="horizontal-product-details">
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>{{ producto.nombre}}</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+                                <p><strong>Marca:</strong> {{ producto.marca }}</p>
+                                <p><strong>Proveedor:</strong> {{ producto.Proveedor.nombre }}</p>
+                                <p><strong>Stock:</strong> {{ producto.inventario.stock }}</p>
+                                <p><strong>Stock Mínimo:</strong> {{ producto.inventario.stockMinimo }}</p>
+                            </td>
+                            <td>
+                                <p><strong>Unidad de Medida:</strong> {{ producto.unidadMedida }}</p>
+                                <p><strong>Tipo:</strong> {{ producto.tipo.nombre }}</p>
+                                <p><strong>Modelo Compatible:</strong> <a href="">{{ producto.modeloCompatible.all|join:', ' }}</a></p>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="product-actions">
+                    <a href="/editarProducto/{{ producto.id }}"  class="button small-button" id ><i class="fas fa-edit"></i> Editar</a> 
+                    <a class="action-link delete-link" id ='{{ producto.id }}' data-id= '{{ producto.nombre }}' > <i class="fas fa-trash-alt"></i> Eliminar</a> 
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h2>No se ha ingresado ningún producto</h2>
+        {% endif %}
+    </div>
+    <div id="productoFormContainerP" style="display: none;">
+        {% include 'agregarP.html' %}
+    </div>
+    <div id="productoFormContainerT" style="display: none;">
+        {% include 'agregarT.html' %}
+    </div>
+
+</body>
+</html>

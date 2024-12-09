@@ -1,34 +1,40 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
-from usuarios.models import User
+from usuarios.models import User, Roles
 
-class FormUser(forms.ModelForm):
-    password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
-        required=False,  # No obligatorio al editar
-        label="Contraseña"
-    )
-    confirm_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
-        required=False,  # No obligatorio al editar
-        label="Confirmar Contraseña"
+class UsuarioForm(forms.ModelForm):
+    rol = forms.ModelChoiceField(
+        queryset=Roles.objects.all(),
+        empty_label="Seleccione un Rol",
+        widget=forms.Select(attrs={'class': 'user-select'}),
+        label="Rol del Usuario"
     )
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'rol', 'email']
+        fields = ['first_name', 'last_name', 'username', 'email', 'rol', 'password']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'rol': forms.Select(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'user-input-text', 'placeholder': 'Nombre'}),
+            'last_name': forms.TextInput(attrs={'class': 'user-input-text', 'placeholder': 'Apellido'}),
+            'username': forms.TextInput(attrs={'class': 'user-input-text', 'placeholder': 'Nombre de Usuario'}),
+            'email': forms.EmailInput(attrs={'class': 'user-input-text', 'placeholder': 'Correo Electrónico'}),
+            'password': forms.PasswordInput(attrs={'class': 'user-input-text', 'placeholder': 'Contraseña'}),
+        }
+        labels = {
+            'first_name': 'Nombre',
+            'last_name': 'Apellido',
+            'username': 'Nombre de Usuario',
+            'email': 'Correo Electrónico',
+            'rol': 'Rol del Usuario',
+            'password': 'Contraseña',
+        }
+        help_texts = {
+            'username': 'Ingrese un nombre de usuario único.',
+            'password': 'Ingrese una contraseña segura.',
         }
 
-    def clean(self):
-        cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
-        if password and password != confirm_password:
-            raise forms.ValidationError("Las contraseñas no coinciden.")
-        return cleaned_data
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+        if password:
+            return make_password(password) 
+        return password
