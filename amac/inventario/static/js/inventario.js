@@ -13,16 +13,12 @@ document.addEventListener("DOMContentLoaded", function() {
     btnAP.onclick = function() {
         modalContent.innerHTML = document.getElementById("productoFormContainerP").innerHTML;
         generalModal.style.display = "block";
-        var form = modalContent.querySelector("form");
-        form.action = "{% url 'addProduct' %}";
     };
 
     // Mostrar el formulario de agregar tipo en el modal
     btnAT.onclick = function() {
         modalContent.innerHTML = document.getElementById("productoFormContainerT").innerHTML;
         generalModal.style.display = "block";
-        var form = modalContent.querySelector("form");
-        form.action = "{% url 'addTipo' %}";
     };
 
     DeletProduct.forEach(function(button) {
