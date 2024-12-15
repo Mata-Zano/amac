@@ -1,57 +1,95 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Tarea, Reporte
 from .forms import TareaForm, ReporteForm
-from .decorators import es_planificador, es_operario, es_admin
-
-@login_required 
-@es_planificador
-def lista_tareas(request):
-    tareas = Tarea.objects.filter(planificador=request.user)
-    return render(request, 'reportes/lista_tareas.html', {'tareas': tareas})
+from django.contrib.auth.decorators import login_required
 
 
+# TAREAS
+# Lista Tareas
 @login_required
-@es_planificador
+def lista_tareas(request):
+    tareas = Tarea.objects.all()
+    return render(request, 'lista_tareas.html', {'tareas': tareas})
+
+# Agregar Tarea
+@login_required
 def agregar_tarea(request):
     if request.method == 'POST':
         form = TareaForm(request.POST)
         if form.is_valid():
             tarea = form.save(commit=False)
-            tarea.planificador = request.user  # Asigna automáticamente al usuario actual como planificador
+            tarea.creado_por = request.user  
             tarea.save()
-            return redirect('lista_tareas')
+            return redirect('lista_tareas')  
+        else:
+            print(form.errors)  
     else:
         form = TareaForm()
-    return render(request, 'reportes/agregar_tarea.html', {'form': form})
+    return render(request, 'agregar_tarea.html', {'form': form})
 
-
-
+# Editar Tarea
 @login_required
-@es_operario
-def lista_tareas_operario(request):
-    tareas = Tarea.objects.filter(operario=request.user)
-    return render(request, 'reportes/lista_tareas_operario.html', {'tareas': tareas})
+def editar_tarea(request, tarea_id):
+    tarea = get_object_or_404(Tarea, id=tarea_id)
 
+    if request.method == 'POST':
+        form = TareaForm(request.POST, instance=tarea)
+        if form.is_valid():
+            form.save()  
+            return redirect('lista_tareas')  
+    else:
+        form = TareaForm(instance=tarea)
 
+    return render(request, 'agregar_tarea.html', {'form': form, 'tarea': tarea})
+
+# Eliminar Tarea
 @login_required
-@es_operario
+def eliminar_tarea(request, tarea_id):
+    tarea = get_object_or_404(Tarea, id=tarea_id)
+    tarea.delete()
+    return redirect('lista_tareas')
+
+
+
+# REPORTES
+# Lista Reportes
+@login_required
+def lista_reportes(request):
+    reportes = Reporte.objects.all()
+    return render(request, 'lista_reportes.html', {'reportes': reportes})
+
+# Crear Reporte
+@login_required
 def agregar_reporte(request):
     if request.method == 'POST':
         form = ReporteForm(request.POST)
         if form.is_valid():
             reporte = form.save(commit=False)
-            reporte.creador = request.user  # Asigna al usuario actual como creador del reporte
+            reporte.creado_por = request.user  # Asigna el usuario actual como creador
             reporte.save()
-            return redirect('lista_reportes_operario')
+            return redirect('lista_reportes')
     else:
         form = ReporteForm()
-    return render(request, 'reportes/agregar_reporte.html', {'form': form})
+    return render(request, 'agregar_reporte.html', {'form': form})
 
+# Editar Reporte
+login_required
+def editar_reporte(request, reporte_id):
+    reporte = get_object_or_404(Reporte, id=reporte_id)
+    if request.method == 'POST':
+        form = ReporteForm(request.POST, instance=reporte)
+        if form.is_valid():
+            reporte = form.save(commit=False)
+            reporte.estado = request.POST.get('estado', 'off') == 'on'
+            reporte.save()
+            return redirect('lista_reportes')
+    else:
+        form = ReporteForm(instance=reporte)
+    return render(request, 'agregar_reporte.html', {'form': form, 'reporte': reporte})
 
-
+# Eliminar Reporte
 @login_required
-@es_admin
-def lista_reportes(request):
-    reportes = Reporte.objects.all()
-    return render(request, 'reportes/lista_reportes.html', {'reportes': reportes})
+def eliminar_reporte(request, reporte_id):
+    reporte = get_object_or_404(Reporte, id=reporte_id)
+    reporte.delete()
+    return redirect('lista_reportes')

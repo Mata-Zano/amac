@@ -154,3 +154,6 @@ LOGOUT_REDIRECT_URL = 'home'
 
 AUTH_USER_MODEL = 'usuarios.User'
 
+HANDLER403 = 'django.views.defaults.permission_denied'
+
+

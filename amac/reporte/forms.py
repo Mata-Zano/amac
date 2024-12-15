@@ -1,51 +1,45 @@
 from django import forms
 from .models import Tarea, Reporte
 from usuarios.models import User
-
+from django.core.exceptions import ValidationError
+from datetime import date
+from usuarios.models import User, Roles
 
 class TareaForm(forms.ModelForm):
-    operario = forms.ModelChoiceField(
-        queryset=User.objects.filter(rol__nombre='Operario'),
-        widget=forms.Select(attrs={'class': 'form-control'}),
-        label="Asignar a Operario"
-    )
-
     class Meta:
         model = Tarea
-        fields = ['titulo', 'descripcion', 'nota', 'plazo', 'tipo_trabajo', 'operario']
+        fields = ['titulo', 'descripcion', 'tipo_trabajo', 'fechaFinalizacion', 'asignado_a', 'nota']
         widgets = {
-            'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Título de la Tarea'}),
-            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descripción detallada'}),
-            'nota': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Notas adicionales'}),
-            'plazo': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'tipo_trabajo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tipo de trabajo'}),
+            'fechaFinalizacion': forms.DateInput(attrs={'type': 'date'}),
         }
-        labels = {
-            'titulo': 'Título',
-            'descripcion': 'Descripción',
-            'nota': 'Notas',
-            'plazo': 'Plazo',
-            'tipo_trabajo': 'Tipo de Trabajo',
-        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        operario_rol = Roles.objects.filter(nombre__iexact="operario").first()
+        if operario_rol:
+            self.fields['asignado_a'].queryset = User.objects.filter(rol=operario_rol)
+        else:
+            self.fields['asignado_a'].queryset = User.objects.none()
+
+    def clean_fechaFinalizacion(self):
+        fecha = self.cleaned_data.get('fechaFinalizacion')
+        if fecha and fecha < date.today():
+            raise ValidationError("La fecha de finalización no puede ser en el pasado.")
+        return fecha
+
+
+
 
 
 class ReporteForm(forms.ModelForm):
-    tarea = forms.ModelChoiceField(
-        queryset=Tarea.objects.all(),
-        widget=forms.Select(attrs={'class': 'form-control'}),
-        label="Tarea Relacionada"
-    )
-
     class Meta:
         model = Reporte
         fields = ['asunto', 'mensaje', 'estado', 'tarea']
         widgets = {
-            'asunto': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Asunto del reporte'}),
-            'mensaje': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Detalles del reporte'}),
             'estado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'mensaje': forms.Textarea(attrs={'rows': 4}),
         }
-        labels = {
-            'asunto': 'Asunto',
-            'mensaje': 'Mensaje',
-            'estado': 'Estado (Cerrado/Abierto)',
-        }
+
+    def clean_estado(self):
+        estado = self.cleaned_data.get('estado', False)
+        return bool(estado)

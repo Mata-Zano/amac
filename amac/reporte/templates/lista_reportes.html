@@ -4,37 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Reportes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inventario.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <title>AmacSpa - Lista de Reportes</title>
 </head>
 <body>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalFormContent"></div>
+        </div>
+    </div>
     <div class="sidebar">
         <div class="logo">
-            <img src="{% static 'image/logo.png' %}" alt="Amac Spa">
+            <img src="{% static 'image/logo.PNG' %}" alt="AmacSpa" class="logo-img">
         </div>
         <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-        <h3>{{ user.rol.nombre }}</h3>
+        <h3>{{ user.rol }}</h3>
+        <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-car"></i> Vehículo</a>
+        <a href="{% url 'lista_reportes' %}" class="sidebar-link"><i class="fas fa-file-alt"></i> Reportes</a>
         <a href="{% url 'lista_tareas' %}" class="sidebar-link"><i class="fas fa-tasks"></i> Tareas</a>
-        <a href="{% url 'lista_reportes' %}" class="sidebar-link active"><i class="fas fa-file-alt"></i> Reportes</a>
+        <a href="{% url 'User' %}" class="sidebar-link"><i class="fas fa-user"></i> Personal</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-boxes"></i> Inventario</a>
         <a href="{% url 'home' %}" class="sidebar-link"><i class="fas fa-arrow-left"></i> Volver</a>
         <a href="{% url 'salir' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 
     <div class="content">
-        <h1>Listado de Reportes</h1>
-
+        <h1>Lista de Reportes</h1>
         <div class="actions-top">
-            <div class="search-container">
-                <input type="text" placeholder="Buscar reporte..." class="search-input">
-            </div>
-            <div class="buttons-right">
-                {% if user.rol.nombre == 'Operario' %}
-                <a href="{% url 'agregar_reporte' %}" class="button small-button">
-                    <i class="fas fa-plus-circle"></i> Crear Reporte
-                </a>
-                {% endif %}
-            </div>
+            <a href="{% url 'agregar_reporte' %}" class="button small-button" id="myBtn"><i class="fas fa-plus-circle"></i> Agregar Reporte</a>
         </div>
 
         {% if reportes %}
@@ -42,31 +44,43 @@
             {% for reporte in reportes %}
             <div class="horizontal-product-item">
                 <div class="horizontal-product-details">
-                    <h3>{{ reporte.asunto }}</h3>
-                    <p><strong>Tarea Relacionada:</strong> {{ reporte.tarea.titulo }}</p>
-                    <p><strong>Creado por:</strong> {{ reporte.creador.get_full_name }}</p>
-                    <p><strong>Estado:</strong> {{ reporte.estado|yesno:"Cerrado,Abierto" }}</p>
-                    <p><strong>Fecha de Creación:</strong> {{ reporte.fecha_creacion }}</p>
+                    <table>
+                        <tr>
+                            <td><h3>{{ reporte.asunto }}</h3></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p><strong>Mensaje:</strong> {{ reporte.mensaje }}</p>
+                                <p><strong>Estado:</strong> {{ reporte.estado|yesno:"Cerrado,Abierto" }}</p>
+                                <p><strong>Fecha de Creación:</strong> {{ reporte.fecha_creacion }}</p>
+                                <p><strong>Creado por:</strong> {{ reporte.creado_por.get_full_name|default:reporte.creado_por.username }}</p>
+                                <p><strong>Tarea Asociada:</strong> {{ reporte.tarea.titulo }}</p>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="product-actions">
-                    {% if user.rol.nombre == 'Administrador' or reporte.creador == user %}
-                    <a href="#" class="button small-button"><i class="fas fa-edit"></i> Editar</a>
-                    <form action="#" method="POST" style="display: inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="button small-button delete-button">
-                            <i class="fas fa-trash-alt"></i> Eliminar
-                        </button>
-                    </form>
-                    {% endif %}
+                    <a href="{% url 'editar_reporte' reporte.id %}" class="button small-button"><i class="fas fa-edit"></i> Editar</a>
+                    <a href="#" onclick="confirmarEliminacion({{ reporte.id }})" class="button small-button danger-button"><i class="fas fa-trash"></i> Eliminar</a>
                 </div>
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <div class="empty-list">
-            <h2 style="text-align: center;">No se ha ingresado ningún reporte.</h2>
-        </div>
+        <h2>No se han agregado reportes</h2>
         {% endif %}
     </div>
+    <div id="productoFormContainerP" style="display: none;">
+        {% include 'agregar_reporte.html' %}
+    </div>
+
+    <script>
+        function confirmarEliminacion(reporteId) {
+            if (confirm('¿Estás seguro de que deseas eliminar este reporte?')) {
+                window.location.href = '/reportes/eliminar/' + reporteId + '/';
+            }
+        }
+    </script>
+
 </body>
 </html>
