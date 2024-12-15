@@ -40,6 +40,7 @@ class Producto(models.Model):
     unidadMedida = models.CharField(max_length=100,null=True)
     imagen = models.ImageField(blank=True, upload_to='productos/')
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True)
+    precio = models.IntegerField(null=True)
 
 
 

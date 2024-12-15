@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <script src="{% static 'js/index.js' %}"></script>
+
     <title>AmacSpa - Mantenimiento Mecanico</title>
     <style>
         
     </style>
 </head>
 <body>
+    {% if user.rol and user.rol.nombre == "Operario" %}
     <div class="sidebar">
         <div class="logo">
             <img src="{% static 'image/logo.PNG' %}" alt="AmacSpa" class="logo-img">
@@ -24,11 +26,40 @@
     <div class="content">
         <div class="dataSectionsContainer">
             <a href="{% url 'vehiculo_lista' %}" class="headerLink" data-bg-image="{% static 'image/material.jpg' %}">
-                <h1 class="tituloVehiculo">Vehiculo</h1>
+                <h1 class="tituloVehiculo">Vehiculos</h1>
                 <div class="notificationBadge">3</div>
             </a>
-            <a href="/" class="headerLink" data-bg-image="{% static 'image/ficha.jpg' %}">
-                <h1>Fichas Electronicas</h1>
+            <a href="{% url 'mantencion' %}" class="headerLink" data-bg-image="{% static 'image/ficha.jpg' %}">
+                <h1>Ingreso de vehiculo</h1>
+            </a>
+            <a href="/" class="headerLink" data-bg-image="{% static 'image/tarea.jpg' %}">
+                <h1>Tareas</h1>
+            </a>
+            <a href="/" class="headerLink" data-bg-image="{% static 'image/reporte.jpeg' %}">
+                <h1>Reportes</h1>
+            </a>
+            <a href="{% url 'inventario' %}" class="headerLink" data-bg-image="{% static 'image/inventario.jpeg' %}">
+                <h1>Inventario</h1>
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{% static 'image/logo.PNG' %}" alt="AmacSpa" class="logo-img">
+        </div>
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <h3>{{ user.rol }}</h3>
+        <a href="{% url 'salir' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    <div class="content">
+        <div class="dataSectionsContainer">
+            <a href="{% url 'vehiculo_lista' %}" class="headerLink" data-bg-image="{% static 'image/material.jpg' %}">
+                <h1 class="tituloVehiculo">Vehiculos</h1>
+                <div class="notificationBadge">3</div>
+            </a>
+            <a href="{% url 'mantencion' %}" class="headerLink" data-bg-image="{% static 'image/ficha.jpg' %}">
+                <h1>Ingreso de vehiculo</h1>
                 <div class="notificationBadge">1</div>
             </a>
             <a href="/" class="headerLink" data-bg-image="{% static 'image/tarea.jpg' %}">
@@ -46,8 +77,10 @@
             <a href="{% url 'inventario' %}" class="headerLink" data-bg-image="{% static 'image/inventario.jpeg' %}">
                 <h1>Inventario</h1>
             </a>
-            <!-- Añadir más secciones según sea necesario -->
         </div>
     </div>
+    {% endif %}
+
 </body>
+
 </html>

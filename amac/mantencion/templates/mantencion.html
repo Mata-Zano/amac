@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel='stylesheet' href="{% static 'css/mantencion.css' %}"  type="text/css">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" type=" text/css">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}" type=" text/css">
+    <script src="{% static 'js/mantencion.js' %}" defer></script>
+    <title>AmacSpa - Ingreso a mantencion</title>
+</head>
+<body>    
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{% static 'image/logo.PNG' %}" alt="AmacSpa" class="logo-img">
+        </div>
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <h3>{{ user.rol }}</h3>
+        <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-car"> </i> Vehículo</a>
+        <a href="{% url 'mantencion' %}" class="sidebar-link"><i class="fas fa-file-alt"> </i> Ingreso de vehiculo</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-tasks"></i> Tareas</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-chart-bar"></i> Reportes</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-users"></i> Clientes</a>
+        <a href="{% url 'User' %}" class="sidebar-link"><i class="fas fa-user"></i> Personal</a>
+        <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-boxes"></i> Inventario</a>
+        <a href="{% url 'home' %}" class="sidebar-link"><i class="fas fa-arrow-left"></i> Volver</a>
+        <a href="{% url 'salir' %}" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>          
+    <div class="content">
+        <div class="horizontal-list-container">
+            <h1>Ingreso a Mantencion</h1>   
+            <div class="agregarproducto-form-container">
+                <form action="{% url 'mantencion' %}" method="POST" class="form-container">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ formMantencion.id_for_label }}"><h2>Marca</h2></label>
+                        {{ marcaForm }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ formMantencion.id_for_label }}"><h2>Modelo</h2></label>
+                        {{ modeloForm }}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ formMantencion.id_for_label }}"><h2>Vehiculo</h2></label>
+                        {{ formVehiculo }}
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="{{ formMantencion.id_for_label }}"><h2>Mantención</h2></label>
+                        {{ formMantencion }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ servicioForm.id_for_label }}"><h2>Servicio</h2></label>
+                        {{ servicioForm }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ productoenMantencionFomr.id_for_label }}">Producto en Mantención</h2></label>
+                        {{ productoenMantencionFomr }}
+                    </div>
+                    <br>
+                    <button type="submit" class="submit-btn">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

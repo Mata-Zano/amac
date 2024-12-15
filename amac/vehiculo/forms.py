@@ -61,7 +61,7 @@ class VehiculoForm(forms.ModelForm):
 
     class Meta:
         model = Vehiculo
-        fields = ['marca', 'modelo', 'descripcion', 'anio_fabricacion', 'color', 'patente', 'num_chasis', 'num_motor', 'estado','kilometraje']
+        fields = ['marca', 'modelo', 'descripcion', 'anio_fabricacion', 'color', 'patente', 'num_chasis', 'num_motor', 'estado', 'kilometraje']
         widgets = {
             'descripcion': forms.TextInput(attrs={'class': 'vehiculo-input-text'}),
             'anio_fabricacion': forms.NumberInput(attrs={'class': 'vehiculo-input-number'}),
@@ -71,7 +71,6 @@ class VehiculoForm(forms.ModelForm):
             'num_motor': forms.TextInput(attrs={'class': 'vehiculo-input-text'}),
             'estado': forms.TextInput(attrs={'class': 'vehiculo-input-text'}),
             'kilometraje': forms.TextInput(attrs={'class': 'vehiculo-input-text'}),
-
         }
         labels = {
             'descripcion': 'Descripción del Vehículo',
@@ -81,6 +80,7 @@ class VehiculoForm(forms.ModelForm):
             'num_chasis': 'Número de Chasis',
             'num_motor': 'Número de Motor',
             'estado': 'Estado del Vehículo',
+            'kilometraje': 'Kilometraje',
         }
         help_texts = {
             'descripcion': 'Proporcione una descripción breve del vehículo.',
@@ -90,6 +90,7 @@ class VehiculoForm(forms.ModelForm):
             'num_chasis': 'Proporcione el número de chasis del vehículo.',
             'num_motor': 'Proporcione el número de motor del vehículo.',
             'estado': 'Indique el estado actual del vehículo.',
+            'kilometraje': 'Indique el kilometraje actual del vehículo.',
         }
 
     def clean_anio_fabricacion(self):

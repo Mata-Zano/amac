@@ -23,11 +23,14 @@ def addUser (request):
     if request.method == 'POST' :
         form = FormUser(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.password = make_password(form.cleaned_data['password'])
-            user.save()
-            messages.success(request, 'Usuario creado correctamente.')
-        return redirect('/')
+            form.save()
+            # user = form.save(commit=False)
+            # user.password = make_password(form.cleaned_data['password'])
+            # form.save()
+            # messages.success(request, 'Usuario creado correctamente.')
+            return redirect('/')
+    else:
+        form = FormUser()
     data = {'form' : form}
     return render(request, 'agregar.html', data)
   
