@@ -32,10 +32,10 @@
             <a href="{% url 'mantencion' %}" class="headerLink" data-bg-image="{% static 'image/ficha.jpg' %}">
                 <h1>Ingreso de vehiculo</h1>
             </a>
-            <a href="/" class="headerLink" data-bg-image="{% static 'image/tarea.jpg' %}">
+            <a href="{% url 'lista_tareas' %}" class="headerLink" data-bg-image="{% static 'image/tarea.jpg' %}">
                 <h1>Tareas</h1>
             </a>
-            <a href="/" class="headerLink" data-bg-image="{% static 'image/reporte.jpeg' %}">
+            <a href="{% url 'lista_reportes' %}" class="headerLink" data-bg-image="{% static 'image/reporte.jpeg' %}">
                 <h1>Reportes</h1>
             </a>
             <a href="{% url 'inventario' %}" class="headerLink" data-bg-image="{% static 'image/inventario.jpeg' %}">
@@ -62,13 +62,13 @@
                 <h1>Ingreso de vehiculo</h1>
                 <div class="notificationBadge">1</div>
             </a>
-            <a href="/" class="headerLink" data-bg-image="{% static 'image/tarea.jpg' %}">
+            <a href="{% url 'lista_tareas' %}" class="headerLink" data-bg-image="{% static 'image/tarea.jpg' %}">
                 <h1>Tareas</h1>
             </a>
-            <a href="/" class="headerLink" data-bg-image="{% static 'image/reporte.jpeg' %}">
+            <a href="{% url 'lista_reportes' %}" class="headerLink" data-bg-image="{% static 'image/reporte.jpeg' %}">
                 <h1>Reportes</h1>
             </a>
-            <a href="/" class="headerLink" data-bg-image="{% static 'image/cliente.jpeg' %}">
+            <a href="{% url 'listarCliente' %}" class="headerLink" data-bg-image="{% static 'image/cliente.jpeg' %}">
                 <h1>Clientes</h1>
             </a>
             <a href="{% url 'User' %}" class="headerLink" data-bg-image="{% static 'image/personal.jpg' %}">

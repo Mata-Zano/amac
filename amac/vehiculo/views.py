@@ -1,9 +1,36 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Vehiculo, Marca, Modelo
+from .models import Vehiculo, Marca, Modelo, Cliente
 from .forms import *
 from django.contrib.auth.decorators import login_required
 import os
+
+
+@login_required
+def listarClientes(request):
+    clientes = Cliente.objects.all()
+    data = {
+        'clientes':clientes
+    }
+    return render(request, 'cliente_lista.html', data)
+
+@login_required
+def crearClientes(request):
+    cliente_form = ClienteForm()
+
+    if request.method == 'POST':
+        cliente_form = ClienteForm(request.POST)
+        if cliente_form.is_valid():
+            cliente_form.save()
+            return redirect('listarCliente')
+    
+    data = {'cliente_form': cliente_form}
+    return render(request, 'agregar_cliente.html',data)
+# @login_required
+# def listarClientes(request):
+#     return render(request, 'cliente_lista.html')
+
+
 
 @login_required
 def registro_vehiculo(request):

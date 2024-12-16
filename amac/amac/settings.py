@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'vehiculo',
     'inventario',
     'mantencion',
+    'reporte',
 ]
 
 MIDDLEWARE = [

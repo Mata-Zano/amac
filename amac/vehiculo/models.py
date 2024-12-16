@@ -62,3 +62,18 @@ class Vehiculo(models.Model):
 
     def __str__(self):
         return f"{self.marca.nombre} {self.modelo.nombre} ({self.patente})"
+class Cliente(models.Model): 
+    razon_social = models.CharField(max_length=255, null=True) 
+    rut = models.CharField(max_length=20, unique=True, null=True) 
+    direccion = models.CharField(max_length=255, null=True) 
+    telefono = models.CharField(max_length=15, null=True) 
+    email = models.EmailField() 
+    nombre_contacto = models.CharField(max_length=255, null=True) 
+    cargo_contacto = models.CharField(max_length=255, null=True) 
+    estado = models.CharField(max_length=50, choices=(('activo', 'Activo'), ('inactivo', 'Inactivo')), null=True) 
+    vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE, null=True)
+    def mostrar_informacion(self): 
+        return f'{self.razon_social} ({self.rut}) - Contacto: {self.nombre_contacto}' 
+    
+    def __str__(self): 
+        return self.razon_social

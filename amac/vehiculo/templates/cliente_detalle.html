@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalles de Cliente</title>
+</head>
+<body>
+    <h1>Detalles de {{ cliente.razon_social }}</h1>
+    <p>RUT: {{ cliente.rut }}</p>
+    <p>Dirección: {{ cliente.direccion }}</p>
+    <p>Teléfono: {{ cliente.telefono }}</p>
+    <p>Email: {{ cliente.email }}</p>
+    <p>Contacto: {{ cliente.nombre_contacto }} ({{ cliente.cargo_contacto }})</p>
+    <p>Estado: {{ cliente.estado }}</p>
+    
+    <h2>Vehículos</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Año</th>
+                <th>Color</th>
+                <th>Kilometraje</th>
+                <th>Patente</th>
+                <th>Chasis</th>
+                <th>Motor</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehiculo in cliente.vehiculos.all %}
+            <tr>
+                <td>{{ vehiculo.descripcion }}</td>
+                <td>{{ vehiculo.anio_fabricacion }}</td>
+                <td>{{ vehiculo.color }}</td>
+                <td>{{ vehiculo.kilometraje }}</td>
+                <td>{{ vehiculo.patente }}</td>
+                <td>{{ vehiculo.numero_chasis }}</td>
+                <td>{{ vehiculo.numero_motor }}</td>
+                <td>{{ vehiculo.estado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{% url 'editar_cliente' cliente.id %}">Editar Cliente</a>
+    <a href="{% url 'clientes_list' %}">Volver a la lista de clientes</a>
+</body>
+</html>

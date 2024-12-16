@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/usuario.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/form.css' %}" type="text/css">
+    <title>Amac Spa - {% if reporte.id %}Editar Reporte{% else %}Agregar Reporte{% endif %}</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Gestión AMAC</h1>
+        <a href="{% url 'User' %}"><i class="fas fa-user"></i> Usuarios</a>
+        <a href="#"><i class="fas fa-briefcase"></i> Roles</a>
+        <a href="{% url 'lista_reportes' %}"><i class="fas fa-file-alt"></i> Reportes</a>
+        <a href="{% url 'lista_tareas' %}"><i class="fas fa-tasks"></i> Tareas</a>
+    </div>
+    <div class="content">
+        <div class="header">
+            <h1>Amac Spa</h1>
+        </div>
+        <div class="form-container">
+            <h2>{% if reporte.id %}Editar Reporte{% else %}Agregar Reporte{% endif %}</h2>
+            <form method="POST" action="{% if reporte.id %}{% url 'editar_reporte' reporte.id %}{% else %}{% url 'agregar_reporte' %}{% endif %}">
+                {% csrf_token %}
+                
+                <!-- Campo: Asunto -->
+                <div class="form-group">
+                    <label for="id_asunto">Asunto</label>
+                    {{ form.asunto }}
+                    {% for error in form.asunto.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Campo: Mensaje -->
+                <div class="form-group">
+                    <label for="id_mensaje">Mensaje</label>
+                    {{ form.mensaje }}
+                    {% for error in form.mensaje.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Campo: Estado -->
+                <div class="form-group">
+                    <label for="id_estado">Estado</label>
+                    {{ form.estado }}
+                    {% for error in form.estado.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Campo: Tarea Asociada -->
+                <div class="form-group">
+                    <label for="id_tarea">Tarea Asociada</label>
+                    {{ form.tarea }}
+                    {% for error in form.tarea.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Botón de envío -->
+                <input type="submit" value="{% if reporte.id %}Guardar Cambios{% else %}Agregar Reporte{% endif %}">
+            </form>
+            <div class="back-link">
+                <a href="{% url 'lista_reportes' %}">Volver al listado</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Vehiculo, Marca, Modelo
+from .models import Vehiculo, Marca, Modelo, Cliente
 from django.core.exceptions import ValidationError
 
 class MarcaForm(forms.ModelForm):
@@ -104,3 +104,8 @@ class VehiculoForm(forms.ModelForm):
         if not estado:
             raise ValidationError('El estado del vehículo no puede estar vacío.')
         return estado
+
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ['razon_social', 'rut', 'direccion', 'telefono', 'email', 'nombre_contacto', 'cargo_contacto', 'estado', 'vehiculo']
