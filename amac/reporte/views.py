@@ -73,7 +73,7 @@ def agregar_reporte(request):
     return render(request, 'agregar_reporte.html', {'form': form})
 
 # Editar Reporte
-login_required
+@login_required
 def editar_reporte(request, reporte_id):
     reporte = get_object_or_404(Reporte, id=reporte_id)
     if request.method == 'POST':
