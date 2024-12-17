@@ -27,7 +27,7 @@ def addTipo (request):
         form = TipoForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/')
+        return redirect('/inventario/')
     data = {'form' : form}
     return render(request, 'agregarT.html', data)
 
@@ -44,7 +44,7 @@ def agregarProducto(request):
                 inventario = inventario_form.save(commit=False)
                 inventario.producto = producto
                 inventario.save()
-            return redirect('/')
+            return redirect('/inventario/')
     else:
         producto_form = ProductoForm()
         inventario_form = InventarioForm()
@@ -69,7 +69,7 @@ def editProduct(request, id):
         if producto_form.is_valid() and inventario_form.is_valid():
             inventario_form.save()
             producto_form.save()
-        return redirect('/')
+        return redirect('/inventario/')
     data = {'producto_form':producto_form,
             'inventario_form':inventario_form}
     return render(request, 'editarP.html', data)

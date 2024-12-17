@@ -1,9 +1,9 @@
 from django.db import models
-from vehiculo.models import Vehiculo
-from usuarios.models import User
-from inventario.models import Producto
-
-
+from vehiculo.models import *
+from usuarios.models import *
+from inventario.models import *
+from mantencion.models import *
+from reporte.models import *
 
 class Servicio(models.Model):
     nombre = models.CharField(max_length=100, blank=False)
@@ -24,11 +24,10 @@ class Mantencion(models.Model):
 
     fecha = models.DateField(auto_now_add=True)
     vehiculo = models.ForeignKey(Vehiculo, on_delete=models.CASCADE, null=True)
-    # cliente = models.ForeignKey(User, on_delete=models.CASCADE)
-    # reporte = modelsforeignKey(Reporte, on_delete=models.CASCADE)
-    # recepcionista = models.ForeignKey(User, on_delete=models.CASCADE)
-    # tarea = models.manyToManyField(Tarea,through='ProductoUtilizado',blank=True)
-    # factura = models.ForeignKey(Factura, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True)
+    reporte = models.ForeignKey(Reporte, on_delete=models.CASCADE, null=True)
+    recepcionista = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    tarea = models.ForeignKey(Tarea,blank=True, on_delete=models.CASCADE, null=True)
     revision_inicial = models.CharField(max_length=650, null=True, blank=True)
     servicio = models.ManyToManyField(Servicio, blank=True)
     precio_total = models.IntegerField(null=True,)

@@ -27,8 +27,8 @@
         <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-car"></i> Vehículo</a>
         <a href="{% url 'mantencion' %}" class="sidebar-link"><i class="fas fa-file-alt"></i> Mantencion</a>
         <a href="{% url 'lista_tareas' %}" class="sidebar-link"><i class="fas fa-tasks"></i> Tareas</a>
-        <a href="{% url 'reportes' %}" class="sidebar-link"><i class="fas fa-chart-bar"></i> Reportes</a>
-        <a href="{% url 'cliente' %}" class="sidebar-link"><i class="fas fa-users"></i> Clientes</a>
+        <a href="{% url 'lista_reportes' %}" class="sidebar-link"><i class="fas fa-chart-bar"></i> Reportes</a>
+        <a href="{% url 'listarCliente' %}" class="sidebar-link"><i class="fas fa-users"></i> Clientes</a>
         <a href="{% url 'User' %}" class="sidebar-link"><i class="fas fa-user"></i> Personal</a>
         <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-boxes"></i> Inventario</a>
         <a href="{% url 'home' %}" class="sidebar-link"><i class="fas fa-arrow-left"></i> Volver</a>
@@ -69,7 +69,10 @@
             {% endfor %}
         </div>
         {% else %}
-        <h2>No se han agregado reportes</h2>
+        <div class="content">
+            <h2>No se han agregado reportes</h2>
+
+        </div>
         {% endif %}
     </div>
     <div id="productoFormContainerP" style="display: none;">

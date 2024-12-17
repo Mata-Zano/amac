@@ -34,12 +34,7 @@ class TareaForm(forms.ModelForm):
 class ReporteForm(forms.ModelForm):
     class Meta:
         model = Reporte
-        fields = ['asunto', 'mensaje', 'estado', 'tarea']
+        fields = ['asunto', 'mensaje',  'tarea']
         widgets = {
-            'estado': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'mensaje': forms.Textarea(attrs={'rows': 4}),
         }
-
-    def clean_estado(self):
-        estado = self.cleaned_data.get('estado', False)
-        return bool(estado)

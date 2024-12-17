@@ -7,25 +7,54 @@ from django.forms import modelformset_factory
 @login_required
 
 def mantencion(request):
-    last_mantencion = Mantencion.objects.order_by('id').last()  # Última mantención
+    # Formulario de cada entidad
     formMantencion = MantencionForm()
     servicioForm = ServicioForm()
     vehiculoForm = VehiculoForm()
     modeloForm = ModeloForm()
     marcaForm = MarcaForm()
-    productoenMantencionFomr = ProductoEnMantencionForm()
 
+    if request.method == 'POST':
+        # Crear el formulario de cada entidad
+        formMantencion = MantencionForm(request.POST)
+        servicio = ServicioForm(request.POST)  
+        vehiculo = VehiculoForm(request.POST)
+        modelo = ModeloForm(request.POST)
+        marca = MarcaForm(request.POST)
+
+        if marca.is_valid():  # Primero, guarda la marca
+            marca_instance = marca.save()  # Guarda la marca y obtiene su instancia
+
+            # Crea el modelo asociado a la marca
+            if modelo.is_valid():
+                modelo.instance.marca = marca_instance  # Asocia el modelo con la marca
+                modelo.save()  # Guarda el modelo
+
+                # Crea el vehículo asociado al modelo y la marca
+                if vehiculo.is_valid():
+                    vehiculo.instance.marca = marca_instance  # Asocia el vehículo con la marca
+                    vehiculo.instance.modelo = modelo.instance  # Asocia el vehículo con el modelo
+                    vehiculo.save()  # Guarda el vehículo
+
+                    # Finalmente, crea la mantención usando el vehículo
+                    if formMantencion.is_valid():
+                        formMantencion.instance.vehiculo = vehiculo.instance  # Asocia la mantención con el vehículo
+                        formMantencion.save()  # Guarda la mantención
+
+            # Redirige a otra vista o muestra un mensaje de éxito
+            return redirect('lista/')  # Cambia a la URL de tu elección
+
+    # Datos para renderizar la página
     data = {
-        'last_mantencion': last_mantencion,
         'formMantencion': formMantencion,
         'formVehiculo': vehiculoForm,
-        'servicioForm': servicioForm,
         'modeloForm': modeloForm,
         'marcaForm': marcaForm,
-        'productoenMantencionFomr': productoenMantencionFomr,
-        }
+        'productoenMantencionFomr': ProductoEnMantencionForm(),
+    }
 
     return render(request, 'mantencion.html', data)
+
    # Crear formulario para Mantencion
     # MantencionFormSet = modelformset_factory(ProductoEnMantencion, form=ProductoEnMantencionForm, extra=1, can_delete=True)
     

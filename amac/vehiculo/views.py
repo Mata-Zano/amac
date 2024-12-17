@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Vehiculo, Marca, Modelo, Cliente
 from .forms import *
+from mantencion.models import Mantencion
 from django.contrib.auth.decorators import login_required
 import os
 
@@ -24,7 +25,7 @@ def crearClientes(request):
             cliente_form.save()
             return redirect('listarCliente')
     
-    data = {'cliente_form': cliente_form}
+    data = {'form': cliente_form}
     return render(request, 'agregar_cliente.html',data)
 # @login_required
 # def listarClientes(request):
@@ -45,14 +46,14 @@ def registro_vehiculo(request):
 
 @login_required
 def lista_vehiculos(request):
-    vehiculos = Vehiculo.objects.all()
+    mantencion = Mantencion.objects.all()
     marca = Marca.objects.all()
     vehiculo_form = VehiculoForm()
     modelo_form = ModeloForm()
     marca_form = MarcaForm()
 
     data ={
-        'vehiculos': vehiculos,
+        'mantenciones': mantencion,
         'marcas': marca,
         'vehiculo_form': vehiculo_form,
         'modelo_form': modelo_form,

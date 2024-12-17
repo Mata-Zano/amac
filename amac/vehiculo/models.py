@@ -4,8 +4,21 @@ from django.db import models
 
 
 class Marca(models.Model):
+    PAISES_CHOICES = [
+        ('japon', 'Japón'),
+        ('corea_del_sur', 'Corea del Sur'),
+        ('alemania', 'Alemania'),
+        ('estados_unidos', 'Estados Unidos'),
+        ('china', 'China'),
+        ('francia', 'Francia'),
+        ('italia', 'Italia'),
+    ]
+
     nombre = models.CharField(max_length=100)
-    pais_origen = models.CharField(max_length=100)
+    pais_origen = models.CharField(
+        max_length=50,
+        choices=PAISES_CHOICES,
+        )
 
     def __str__(self):
         return self.nombre
@@ -22,8 +35,21 @@ class Marca(models.Model):
         self.save()
 
 class Modelo(models.Model):
+    TIPO_CHOICES = [
+        ('auto', 'Automóvil'),
+        ('suv', 'SUV'),
+        ('camioneta', 'Camioneta'),
+        ('jeep', 'Jeep'),
+        ('camion', 'Camión'),
+        ('bus', 'Bus'),
+        ('minivan', 'Minivan'),
+        ('maquinaria', 'Maquinaria Pesada'),
+        ('pickup', 'Pick-Up'),
+        ('furgon', 'Furgón'),
+        ('minibus', 'Minibús'),
+    ]
     nombre = models.CharField(max_length=100)
-    tipo = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=1000, choices=TIPO_CHOICES)
     version = models.CharField(max_length=100)
     motor = models.CharField(max_length=100)
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE, related_name='modelos')
@@ -47,6 +73,13 @@ class Modelo(models.Model):
         self.save()
 
 class Vehiculo(models.Model):
+
+    ESTADO_CHOICES = [
+        ('buen_estado', 'Buen Estado'),
+        ('estado_regular', 'Estado Regular'),
+        ('mal_estado', 'Mal Estado'),
+    ]
+
     descripcion = models.CharField(max_length=50)
     anio_fabricacion = models.IntegerField()
     color = models.CharField(max_length=50)
@@ -54,7 +87,10 @@ class Vehiculo(models.Model):
     patente = models.CharField(max_length=10)
     num_chasis = models.CharField(max_length=50)
     num_motor = models.CharField(max_length=50)
-    estado = models.CharField(max_length=50)
+    estado = models.CharField(
+        max_length=50,
+        choices=ESTADO_CHOICES,
+        )
     marca = models.ForeignKey(Marca, on_delete=models.CASCADE)
     modelo = models.ForeignKey(Modelo, on_delete=models.CASCADE)
     

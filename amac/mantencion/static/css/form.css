@@ -1,4 +1,3 @@
-/* Container for the agregarproducto form */
 /* Ocultar el mensaje predeterminado de campo obligatorio */
 input:required,
 select:required {
@@ -11,16 +10,17 @@ select:required:invalid {
     border-color: #ccc; /* Opcional, quitar color de error */
 }
 
+/* Contenedor principal del formulario */
 .agregarproducto-form-container {
     max-width: 800px;
-    margin: 30px auto;
+    margin: 30px auto; /* Centrado horizontal */
     padding: 25px;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Title of the agregarproducto form */
+/* Título del formulario */
 .agregarproducto-form-title {
     text-align: center;
     font-size: 1.8em;
@@ -28,12 +28,19 @@ select:required:invalid {
     margin-bottom: 20px;
 }
 
-/* Form groups */
+/* Subtítulos de secciones */
+.agregarproducto-form-subtitle {
+    font-size: 1.4em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Grupos del formulario */
 .agregarproducto-form-group {
     margin-bottom: 20px;
 }
 
-/* Labels */
+/* Etiquetas de los campos */
 .agregarproducto-form-label {
     font-weight: bold;
     display: block;
@@ -41,7 +48,7 @@ select:required:invalid {
     color: #555;
 }
 
-/* Text inputs, select dropdowns, textarea, and file inputs */
+/* Estilos de los inputs, selects y textareas */
 .agregarproducto-input-text,
 .agregarproducto-input-number,
 .agregarproducto-input-date,
@@ -54,26 +61,10 @@ select:required:invalid {
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 1em;
+    color: #333;
 }
 
-/* Checkboxes and radio buttons */
-.agregarproducto-input-checkbox {
-    margin-right: 10px;
-}
-
-/* Add extra styling for checkbox lists */
-.agregarproducto-checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.agregarproducto-checkbox-group .agregarproducto-form-label {
-    width: auto;
-    margin-right: 15px;
-    font-weight: normal;
-}
-
-/* Button styles */
+/* Botones del formulario */
 .agregarproducto-button {
     padding: 12px 20px;
     background-color: #007bff;
@@ -84,20 +75,37 @@ select:required:invalid {
     font-size: 1em;
     transition: background-color 0.3s ease;
     display: block;
-    margin: 20px auto 0;
+    margin: 20px auto 0; /* Centrado */
 }
 
 .agregarproducto-button:hover {
     background-color: #0056b3;
 }
 
-/* Placeholder styling */
+/* Placeholder */
 .agregarproducto-input-text::placeholder,
 .agregarproducto-textarea::placeholder {
     color: #999;
 }
 
-/* Responsive adjustments */
+/* Enlace "Volver" */
+.agregarproducto-backlink {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.agregarproducto-backlink a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.agregarproducto-backlink a:hover {
+    color: #0056b3;
+}
+
+/* Estilos responsivos */
 @media (max-width: 768px) {
     .agregarproducto-form-container {
         padding: 15px;
@@ -111,4 +119,3 @@ select:required:invalid {
         width: 100%;
     }
 }
-

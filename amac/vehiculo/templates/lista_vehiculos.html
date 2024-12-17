@@ -27,8 +27,8 @@
         <a href="{% url 'vehiculo_lista' %}" class="sidebar-link"><i class="fas fa-car"></i> Vehículo</a>
         <a href="{% url 'mantencion' %}" class="sidebar-link"><i class="fas fa-file-alt"></i> Mantencion</a>
         <a href="{% url 'lista_tareas' %}" class="sidebar-link"><i class="fas fa-tasks"></i> Tareas</a>
-        <a href="{% url 'reportes' %}" class="sidebar-link"><i class="fas fa-chart-bar"></i> Reportes</a>
-        <a href="{% url 'cliente' %}" class="sidebar-link"><i class="fas fa-users"></i> Clientes</a>
+        <a href="{% url 'lista_reportes' %}" class="sidebar-link"><i class="fas fa-chart-bar"></i> Reportes</a>
+        <a href="{% url 'listarCliente' %}" class="sidebar-link"><i class="fas fa-users"></i> Clientes</a>
         <a href="{% url 'User' %}" class="sidebar-link"><i class="fas fa-user"></i> Personal</a>
         <a href="{% url 'inventario' %}" class="sidebar-link"><i class="fas fa-boxes"></i> Inventario</a>
         <a href="{% url 'home' %}" class="sidebar-link"><i class="fas fa-arrow-left"></i> Volver</a>
@@ -36,7 +36,7 @@
     </div>
     
     <div class="content">
-        <h1>Listado de Vehiculos</h1>
+        <h1>Vehiculos en Mantencion</h1>
         <div class="actions-top"> 
             <div class="search-container">
                 <input type="text" placeholder="Buscar vehiculo..." class="search-input">
@@ -53,16 +53,10 @@
                     {% endif %}
                 </select>
             </div>
-            <div class="buttons-right">
-                <!-- <button href="" class="button small-button" id="myBtn" ><i class="fas fa-plus-circle"></i> Agregar Tipo de Producto</button> -->
-                <button href="" class="button small-button" id="myBtn2" ><i class="fas fa-plus-circle"></i> Agregar Vehiculo</button>
-                <button href="" class="button small-button" id="myBtn" ><i class="fas fa-plus-circle"></i> Agregar Marca</button>
-                <button href="" class="button small-button" id="myBtn3" ><i class="fas fa-plus-circle"></i> Agregar Modelo</button>
-            </div>
         </div>
-        {% if vehiculos %}
+        {% if mantenciones %}
         <div class="horizontal-list-container">
-            {% for vehiculo in vehiculos %}
+            {% for mantencion in mantenciones %}
             <div class="horizontal-product-item">
                 <!-- {% if vehiculos.imagen %} -->
                 <!-- <img src="{{ vehiculos.imagen.url }}" alt="{{ vehiculos.nombre }}" class="product-img-horizontal"> -->
@@ -73,23 +67,44 @@
                     <table>
                         <tr>
                             <td>
-                                <h3>{{ vehiculo.nombre }}</h3>
+                                <h3>{{ mantencion.vehiculo.cliente_id.nombre_contacto }}</h3>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <p><strong>Modelo:</strong> {{ vehiculo.modelo.nombre }}</p>
-                                <p><strong>Marca:</strong> {{ vehiculo.marca.nombre }}</p>
-                                <p><strong>Año:</strong> {{ vehiculo.anio_fabricacion }}</p>  
-                                <p><strong>Kilometraje:</strong> {{ vehiculo.kilometraje }}</p>
-                                <p><strong>Patente:</strong> {{ vehiculo.patente }}</p>
+                                <p><strong>Modelo:</strong> {{ mantencion.vehiculo.modelo.nombre }}</p>
+                                <p><strong>Marca:</strong> {{ mantencion.vehiculo.marca.nombre }}</p>
+                                <p><strong>Año:</strong> {{ mantencion.vehiculo.anio_fabricacion }}</p>  
+                                <p><strong>Kilometraje:</strong> {{ mantencion.vehiculo.kilometraje }}</p>
+                                <p><strong>Patente:</strong> {{ mantencion.vehiculo.patente }}</p>
                             </td>
+                            <td></td>
+                            <td></td>
                             <td>
-                                <p><strong>Descripción:</strong> {{ vehiculo.descripcion}}
-                                <p><strong>Color:</strong> {{ vehiculo.color }}</p>
-                                <p><strong>Número de Chasis:</strong> {{ vehiculo.num_chasis}}</p>
-                                <p><strong>Número de Motor:</strong> {{ vehiculo.num_motor }}</p>
-                                <p><strong>Estado:</strong> {{ vehiculo.estado }}</p>
+                                <p><strong>Descripción:</strong> {{ mantencion.vehiculo.descripcion}}
+                                <p><strong>Color:</strong> {{ mantencion.vehiculo.color }}</p>
+                                <p><strong>Número de Chasis:</strong> {{ mantencion.vehiculo.num_chasis}}</p>
+                                <p><strong>Número de Motor:</strong> {{ mantencion.vehiculo.num_motor }}</p>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <p><strong>Fecha ingreso:</strong> {{ mantencion.fecha}}
+                                <p><strong>Reporte:</strong> {{ mantencion.reporte.asunto }}</p>
+                                <p><strong>Recepcionista:</strong> {{ mantencion.recepcionista.nombre}}</p>
+                                <p><strong>Ultima Tarea:</strong> {{ mantencion.tarea.titulo }}</p>
+                                <p><strong>Revicion inicial:</strong> {{ mantencion.revision_inicial }}</p>
+                                    
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <p><strong>Servicios:</strong> {{ mantencion.servicio}}
+                                <p><strong>Precio Total:</strong> {{ mantencion.precio_total }}</p>
+                                <p><strong>Otros Servicios:</strong> {{ mantencion.otroServicio }}</p>
+                                <p><strong>Productos Utilizados:</strong> {{ mantencion.productosUtilizado.producto }}</p>
+                                <p><strong>Estado:</strong> {{ mantencion.estado }}</p>
+                                    
                             </td>
                         </tr>
                     </table>
